@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>A.N.I.S</title>
+        <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+        <div class="top_bar">
+            <div class="left_items">
+                <h1>Acoustic Neural Input System</h1>
+            </div>
+            <div class="right_items">
+                <button id="panel-toggle">☰</button>
+                <button id="theme-toggle">
+                    <img id='mode' src="../Icons/moon.png" width="24" height="24">
+                </button>
+            </div>
+        </div>
+        <div class="container1">
+        <div class="segmented">
+            <button class="active" id="brainBtn">BRAIN</button>
+            <button id="voiceBtn">VOICE</button>
+        </div>
+        </div>
+        <div>
+            <h1>Sis</h1>
+        </div>
+        <div>
+            <div id="eeg-panel">
+                <canvas id="eegChart"></canvas>
+             </div>
+        </div>
+        
+        <div id="chatbot-panel" class="hidden">
+            <div class="chat-header">A.N.I.S
+                <button id="panel-close">☰</button>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div class="bot">System online.</div>
+            </div>
+            <div class="chat-input">
+             <input id="chat-input" type="text" placeholder="Command..." />
+            </div>
+        </div>
+        <script src="../libs/chart.umd.js"></script>
+        <script src="../src/renderer.js"></script>
+    </body>
+</html>

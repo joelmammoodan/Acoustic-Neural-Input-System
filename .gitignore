@@ -1,0 +1,26 @@
+# Node / Electron
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Binaries / archives
+*.exe
+*.zip
+*.bin
+*.tar
+*.rar
