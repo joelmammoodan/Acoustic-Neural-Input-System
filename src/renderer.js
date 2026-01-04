@@ -3,6 +3,7 @@ const { ipcRenderer } = require('electron');
 // DOM Elements
 const btn = document.getElementById('theme-toggle');
 const icon = document.getElementById('mode');
+const brain_icon=document.getElementById('brain-img');
 const currentTheme = localStorage.getItem('theme');
 
 const panelToggle = document.getElementById("panel-toggle");
@@ -11,8 +12,8 @@ const chatbotPanel = document.getElementById("chatbot-panel");
 const input = document.getElementById("chat-input");
 const chatBody = document.getElementById("chat-body");
 
-const brainBtn = document.getElementById('brainBtn');
-const voiceBtn = document.getElementById('voiceBtn');
+//const brainBtn = document.getElementById('brainBtn');
+//const voiceBtn = document.getElementById('voiceBtn');
 
 
 function cssVar(name) {
@@ -27,9 +28,15 @@ function cssVar(name) {
 if(currentTheme === 'dark'){
     document.documentElement.setAttribute('data-theme','dark');
     icon.src = '../Icons/sun.png';
+    brain_icon.src='../Icons/brain_black.png';
+    
+
 } else {
     document.documentElement.removeAttribute('data-theme');
     icon.src = '../Icons/moon.png';
+    brain_icon.src='../Icons/brain_white.png';
+    
+
 }
 
 btn.addEventListener('click', () => {
@@ -39,29 +46,31 @@ btn.addEventListener('click', () => {
         document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('theme','light');
         icon.src = '../Icons/moon.png';
+        brain_icon.src='../Icons/brain_white.png';
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
         icon.src = '../Icons/sun.png';
+        brain_icon.src='../Icons/brain_black.png';
     }
 });
 
 // ---------------------------
 // SEGMENTED BUTTONS
 // ---------------------------
-brainBtn.addEventListener('click', () => {
-    brainBtn.classList.add('active');
-    voiceBtn.classList.remove('active');
-    console.log('Switched to BRAIN mode');
-    window.ipcRenderer?.send('switch-mode', 'brain');
-});
+//brainBtn.addEventListener('click', () => {
+//    brainBtn.classList.add('active');
+//    voiceBtn.classList.remove('active');
+//    console.log('Switched to BRAIN mode');
+//    window.ipcRenderer?.send('switch-mode', 'brain');
+//});
 
-voiceBtn.addEventListener('click', () => {
-    voiceBtn.classList.add('active');
-    brainBtn.classList.remove('active');
-    console.log('Switched to VOICE mode');
-    window.ipcRenderer?.send('switch-mode', 'voice');
-});
+//voiceBtn.addEventListener('click', () => {
+//    voiceBtn.classList.add('active');
+//    brainBtn.classList.remove('active');
+//    console.log('Switched to VOICE mode');
+//    window.ipcRenderer?.send('switch-mode', 'voice');
+//});
 
 // ---------------------------
 // CHAT PANEL TOGGLE
