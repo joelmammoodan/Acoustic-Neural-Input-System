@@ -16,14 +16,46 @@
                 <button id="theme-toggle">
                     <img id='mode' src="../Icons/moon.png" width="24" height="24">
                 </button>
-                <button id="move-to-brain"><img id='brain-img' src='../Icons/brain_white.png' width="20" height="20"><span class="hover-text">Switch to brain</span></button>
+                <button id="move-to-brain"><img id='brain-img' class="mode-icon active" src='../Icons/brain_white.png' width="20" height="20"><img id='voice-img' class="mode-icon" src='../Icons/voice-white.png' width="20" height="20"><span id='mode-hover-text' class="hover-text">Switch to brain</span></button>
             </div>
         </div>
-        <div class="container1">
-            <h4>C3-C4 Differential Signals</h4>
-            <div id="eeg-panel">
-                <canvas id="eegChart"></canvas>
-             </div>
+        <div id="main-content">
+            <div id='brainmode-div'class="main-content-container">
+                <table class="main-content-table">
+                    <tr>
+                        <td colspan="2">
+                        <h4>C3-C4 Differential Signals</h4>
+                        <div id="eeg-panel">
+                        <canvas id="eegChart"></canvas>
+                        </div>
+                        </td>
+                        <td>Row 1 col2</td>
+                       
+                    </tr>
+                    <tr>
+                        <td>Row 2 col1</td>
+                        <td>Row 2 col2</td>
+                        <td>Row 2 col3</td>
+                    </tr>
+                    <tr>
+                        <td>Row 3 col1</td>
+                        <td>Row 3 col2</td>
+                        <td>Row 3 col3</td>
+                    </tr>
+                    <tr>
+                        <td>Row 4 col1</td>
+                        <td>Row 4 col2</td>
+                        <td>Row 4 col3</td>
+                    </tr>
+                    
+                    
+                </table>
+                
+            </div>
+            <div id='voicemode-div' class="main-content-container active">
+                <h4>Div2</h4>
+                
+            </div>
         </div>
         
         

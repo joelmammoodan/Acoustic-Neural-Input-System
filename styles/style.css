@@ -13,14 +13,18 @@
 
 
 }
-
+html,body{
+    height:100%
+}
 body{
     background-color: var(--bg-color);
     color:var(--text-color);
     transition: background-color 0.3s,color 0.3s;
     font-family: sans-serif;
     padding: 0.5%;
-    margin:0%;
+    margin:0;
+    height:100%;
+    
 
 }
 
@@ -218,6 +222,7 @@ button{
 #eeg-panel{
     height: 300px;
     width: 100%;
+    display:block;
 }
 
 #eeg-chart{
@@ -249,4 +254,51 @@ button{
     border-width: 0cap;
     background-color: #00000000;
 
+}
+
+
+#main-content{
+    position: relative;
+    width:100%;
+    height: 100%;
+   
+}
+
+.main-content-container {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    transform: translateX(100%);
+    opacity: 0;
+
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.main-content-container.active {
+    width:100%;
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.mode-icon{
+    display:none;
+}
+
+.mode-icon.active{
+    display:inline-flex;
+}
+
+.main-content-table{
+    width:100%;
+    table-layout: fixed;
+
+}
+
+.main-content-table td{
+    border: 2px solid #000;
+    
+    
 }

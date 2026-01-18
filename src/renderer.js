@@ -4,6 +4,7 @@ const { ipcRenderer } = require('electron');
 const btn = document.getElementById('theme-toggle');
 const icon = document.getElementById('mode');
 const brain_icon=document.getElementById('brain-img');
+const voice_icon=document.getElementById('voice-img');
 const currentTheme = localStorage.getItem('theme');
 
 const panelToggle = document.getElementById("panel-toggle");
@@ -11,7 +12,10 @@ const panelClosed=document.getElementById('panel-close');
 const chatbotPanel = document.getElementById("chatbot-panel");
 const input = document.getElementById("chat-input");
 const chatBody = document.getElementById("chat-body");
-
+const modeChangeBtn=document.getElementById('move-to-brain');
+const braindiv=document.getElementById('brainmode-div');
+const voicediv=document.getElementById('voicemode-div');
+const modeHoverText=document.getElementById("mode-hover-text")
 //const brainBtn = document.getElementById('brainBtn');
 //const voiceBtn = document.getElementById('voiceBtn');
 
@@ -29,15 +33,17 @@ if(currentTheme === 'dark'){
     document.documentElement.setAttribute('data-theme','dark');
     icon.src = '../Icons/sun.png';
     brain_icon.src='../Icons/brain_black.png';
+    voice_icon.src='../Icons/voice-black.png';
     
 
 } else {
     document.documentElement.removeAttribute('data-theme');
     icon.src = '../Icons/moon.png';
     brain_icon.src='../Icons/brain_white.png';
-    
+    voice_icon.src='../Icons/voice-white.png'; 
 
 }
+
 
 btn.addEventListener('click', () => {
     let theme = document.documentElement.getAttribute('data-theme');
@@ -47,13 +53,39 @@ btn.addEventListener('click', () => {
         localStorage.setItem('theme','light');
         icon.src = '../Icons/moon.png';
         brain_icon.src='../Icons/brain_white.png';
+        voice_icon.src='../Icons/voice-white.png'; 
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
         icon.src = '../Icons/sun.png';
         brain_icon.src='../Icons/brain_black.png';
+        voice_icon.src='../Icons/voice-black.png';
     }
 });
+
+
+function switchMode(a, b) {
+  const aIsActive = a.classList.contains("active");
+  const bIsActive = b.classList.contains("active");
+
+  if (aIsActive && !bIsActive) {
+    a.classList.remove("active");
+    b.classList.add("active");
+    modeHoverText.innerHTML='Switch to brain'
+  } else if (bIsActive && !aIsActive) {
+    b.classList.remove("active");
+    a.classList.add("active");
+    modeHoverText.innerHTML='Switch to voice'
+    
+  }
+}
+
+modeChangeBtn.addEventListener('click',()=>{
+    switchMode(voicediv,braindiv);
+    switchMode(voice_icon,brain_icon)
+   
+});
+
 
 // ---------------------------
 // SEGMENTED BUTTONS
@@ -192,3 +224,17 @@ window.addEventListener('DOMContentLoaded',()=>{
             eegChart.update("none");
         }, 4);
 });
+
+
+function resizeEEGCanvas() {
+    const panel = document.getElementById("eeg-panel");
+    const canvas = document.getElementById("eegChart");
+
+    if (!panel || !canvas) return;
+
+    canvas.width  = panel.clientWidth;
+    canvas.height = panel.clientHeight;
+}
+
+window.addEventListener("resize", resizeEEGCanvas);
+resizeEEGCanvas();
