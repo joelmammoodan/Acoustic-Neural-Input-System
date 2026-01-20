@@ -226,15 +226,3 @@ window.addEventListener('DOMContentLoaded',()=>{
 });
 
 
-function resizeEEGCanvas() {
-    const panel = document.getElementById("eeg-panel");
-    const canvas = document.getElementById("eegChart");
-
-    if (!panel || !canvas) return;
-
-    canvas.width  = panel.clientWidth;
-    canvas.height = panel.clientHeight;
-}
-
-window.addEventListener("resize", resizeEEGCanvas);
-resizeEEGCanvas();
