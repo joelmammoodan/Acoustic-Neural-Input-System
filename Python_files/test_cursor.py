@@ -1,6 +1,6 @@
 import pyautogui
 
-screen=pyautogui.size()
+'''screen=pyautogui.size()
 print(screen)
 
 
@@ -21,3 +21,25 @@ pyautogui.click('button.png') # Find where button.png appears on the screen and 
 pyautogui.doubleClick()     # Double click the mouse.
 pyautogui.press('esc')
 pyautogui.alert('This is the message to display.')
+'''
+
+
+
+def spiral_circle():
+    width,height=pyautogui.size()
+    dist=400
+    pyautogui.moveTo((width/2)+300,(height/2)-100)
+    while(dist>0):
+        pyautogui.moveRel(dist,0)
+        pyautogui.click()
+        pyautogui.moveRel(0,dist)
+        pyautogui.click()
+        dist-=1
+        pyautogui.moveRel(-dist,0)
+        pyautogui.click()
+        pyautogui.moveRel(0,-dist)
+        pyautogui.click()
+        dist-=1
+
+
+spiral_circle()
