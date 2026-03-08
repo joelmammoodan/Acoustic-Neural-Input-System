@@ -1,0 +1,34 @@
+# Node / Electron
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+ANIS_env/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+dist/
+build/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Binaries / archives
+*.exe
+*.zip
+*.bin
+*.tar
+*.rar
