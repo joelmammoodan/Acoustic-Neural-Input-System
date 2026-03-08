@@ -193,65 +193,59 @@ function applyThemeToPanel(){
 //btn.addEventListener('click', applyThemeToPanel);
 //applyThemeToPanel();
 
+
+
 //for signal graph
-window.addEventListener('DOMContentLoaded',()=>{
-    const canvas=document.getElementById('eegChart');
-    if(!canvas) return;
+window.addEventListener('DOMContentLoaded', () => {
 
-    const ctx=canvas.getContext('2d');
+    const canvas1 = document.getElementById('eegChart1');
+    const canvas2 = document.getElementById('eegChart2');
 
-    const MAX_POINTS=500;
-    const data=[];
-    const labels=[];
+    if (!canvas1 || !canvas2) return;
 
-    const eegChart=new Chart(ctx,{
-        type:'line',
-        data:{
-            labels,
-            datasets:[{
-                label:'C3',
-                data,
-                borderColor:'#00fd98',
-                borderWidth:1,
-                pointRadius:0,
-                tension:0
-            }]
-        },
-        options: {
-            animation: false,
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: { display: false },
-                y: {
-                min: -200,
-                max: 200,
-                title: { display: true, text: "Amplitude" }
-                }
-            }
-        }
+    const eegChart1 = new SmoothieChart({
+        millisPerPixel: 20,
+        grid: { strokeStyle: '#555', lineWidth: 1 },
+        labels: { fillStyle: '#AAA' },
+        maxValue: 1,
+        minValue: -1,
+        interpolation: 'linear',
     });
 
-    let t = 0;
-        setInterval(() => {
-            if (data.length >= MAX_POINTS) {
-            data.shift();
-            labels.shift();
-            }
+    const eegChart2 = new SmoothieChart({
+        millisPerPixel: 20,
+        grid: { strokeStyle: '#555', lineWidth: 1 },
+        labels: { fillStyle: '#AAA' },
+        maxValue: 1,
+        minValue: -1,
+        interpolation: 'linear',
+    });
 
-            labels.push(t++);
-            data.push(
-            50 * Math.sin(2 * Math.PI * 10 * t / 250) +
-            (Math.random() - 0.5) * 15
-            );
+    eegChart1.streamTo(canvas1, 1000);
+    eegChart2.streamTo(canvas2, 1000);
 
-            eegChart.update("none");
-        }, 4);
+    const verticalSeries = new TimeSeries();
+    const horizontalSeries = new TimeSeries();
 
+    eegChart1.addTimeSeries(verticalSeries, { strokeStyle: '#00fd98', lineWidth: 2 });
+    eegChart2.addTimeSeries(horizontalSeries, { strokeStyle: '#00fd98', lineWidth: 2 });
 
+    // WebSocket
+    
+   const ws = new WebSocket("ws://localhost:8765");
 
+    ws.addEventListener('open', () => {
+        console.log("WebSocket connected");
+    });
+
+    ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        if (msg.stat !== "ACTIVE") return;
+
+        verticalSeries.append(Date.now(), msg.v);
+        horizontalSeries.append(Date.now(), msg.h);
+    };
 });
-
 
 //for the settings button on top bar
 settingsbtn.addEventListener('click',()=>{
@@ -262,11 +256,19 @@ settingsbtn.addEventListener('click',()=>{
 
 //webscoket from python
 
-const ws = new WebSocket("ws://localhost:8765")
 
-ws.onmessage= (event) =>{
-    const signal=event.data
-    console.log(signal)
+
+function showDirection(dir_x,dir_y){
+
+    document.querySelectorAll(".arrow").forEach(a=>{
+        a.classList.remove("active");
+    });
+
+    if(dir_y === "UP") document.getElementById("up").classList.add("active");
+    if(dir_y === "DOWN") document.getElementById("down").classList.add("active");
+    if(dir_x === "LEFT") document.getElementById("left").classList.add("active");
+    if(dir_x === "RIGHT") document.getElementById("right").classList.add("active");
+
 }
 
 

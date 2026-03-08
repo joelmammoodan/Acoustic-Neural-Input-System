@@ -1,20 +1,32 @@
 import asyncio
 import websockets 
-import serial
+import threading
 
 
-ser=serial.Serial("COM3",115200)
+clients=set()
 
-async def send_data(websocket):
-    while True:
-        line = ser.readline().decode().strip()
-        await websocket.send(line)
+async def handler(websocket):
+    clients.add(websocket)
+    try:
+        async for message in websocket:
+            print("Recieved from client:",message)
+    finally:
+        clients.remove(websocket)
 
-async def main():
-    async with websockets.serve(send_data,'localhost',8765):
+async def send_data(data):
+    if clients:
+        await asyncio.gather(*(client.send(data) for client in clients))
+
+async def start_server():
+    async with websockets.serve(handler,"localhost",8765):
+        print("Websocket server started at ws://localhost:8765")
         await asyncio.Future()
-asyncio.run(main())
 
+
+def run_server():
+    asyncio.run(start_server())
+
+threading.Thread(target=run_server,daemon=True).start()
 
 
 

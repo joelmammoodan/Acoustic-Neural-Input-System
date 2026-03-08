@@ -1,67 +1,137 @@
 import serial
 import pyautogui
+import asyncio
+import json
 import time
+
+import WebSocket_broadcast as ws  # your WebSocket module
 
 SERIAL_PORT = "COM3"
 BAUD_RATE = 115200
 
 MOVE_AMOUNT = 2
 SLOPE_THRESHOLD = 0.1
-NEUTRAL_ZONE = 0.06   # Stop when signal returns near 0
+NEUTRAL_ZONE = 0.06
+SEND_INTERVAL = 1/120 # 60 Hz
 
-ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
 pyautogui.PAUSE = 0
-time.sleep(2)
 
+# Track previous values
 prev_h = 0
 prev_v = 0
+move_state_x = 0
+move_state_y = 0
 
-move_state_x = 0   # -1 left, 1 right, 0 idle
-move_state_y = 0   # -1 up, 1 down, 0 idle
+Stat = 'ERROR'
+dir_x = "CENTRE"
+dir_y = "CENTRE"
 
 print("Listening...")
 
-while True:
-    line = ser.readline().decode().strip()
+async def read_and_send():
+    global prev_h, prev_v, move_state_x, move_state_y, Stat, dir_x, dir_y
+    ser = None
+    last_send_time = time.time()
 
-    try:
-        h_str, v_str = line.split(",")
-        current_h = float(h_str)
-        current_v = float(v_str)
-    except:
-        continue
+    while True:
+        # Connect to serial if not connected
+        if ser is None or not ser.is_open:
+            try:
+                ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
+                print("Serial connected")
+                Stat = 'ACTIVE'
+            except serial.SerialException:
+                Stat = 'ERROR'
+                dir_x = "CENTRE"
+                dir_y = "CENTRE"
+                data = {"stat": Stat, "h": -1, "v": -1, "dir_x": dir_x, "dir_y": dir_y}
+                try:
+                    await ws.send_data(json.dumps(data))
+                except:
+                    pass
+                await asyncio.sleep(0.5)
+                continue
 
-    #to calculate slope
-    slope_h = current_h - prev_h
-    slope_v = current_v - prev_v
+        # Read line from serial in a thread to avoid blocking
+        try:
+            line = await asyncio.to_thread(ser.readline)
+            line = line.decode(errors='ignore').strip()
+        except serial.SerialException:
+            print("Serial disconnected, retrying...")
+            ser.close()
+            ser = None
+            continue
 
-    #Horizontal State Control
-    if move_state_x == 0:
-        if slope_h > SLOPE_THRESHOLD:
-            move_state_x = 1     # RIGHT
-        elif slope_h < -SLOPE_THRESHOLD:
-            move_state_x = -1    # LEFT
-    else:
-        # Stop when signal returns near zero
-        if abs(current_h) < NEUTRAL_ZONE:
-            move_state_x = 0
+        # Parse data
+        try:
+            h_str, v_str = line.split(",")
+            current_h = float(h_str)
+            current_v = float(v_str)
+            Stat = 'ACTIVE'
+        except Exception:
+            Stat = 'ERROR'
+            current_h = prev_h
+            current_v = prev_v
 
-    #Vertical State Control
-    if move_state_y == 0:
-        if slope_v > SLOPE_THRESHOLD:
-            move_state_y = -1    # UP (screen inverted)
-        elif slope_v < -SLOPE_THRESHOLD:
-            move_state_y = 1     # DOWN
-    else:
-        if abs(current_v) < NEUTRAL_ZONE:
-            move_state_y = 0
+        # Calculate slopes
+        slope_h = current_h - prev_h
+        slope_v = current_v - prev_v
 
-    #Movement-
-    move_x = move_state_x * MOVE_AMOUNT
-    move_y = move_state_y * MOVE_AMOUNT
+        # Horizontal control
+        if move_state_x == 0:
+            if slope_h > SLOPE_THRESHOLD:
+                dir_x = 'RIGHT'
+                move_state_x = 1
+            elif slope_h < -SLOPE_THRESHOLD:
+                dir_x = 'LEFT'
+                move_state_x = -1
+        else:
+            if abs(current_h) < NEUTRAL_ZONE:
+                dir_x = "CENTRE"
+                move_state_x = 0
 
-    if move_x != 0 or move_y != 0:
-        pyautogui.moveRel(move_x, move_y)
+        # Vertical control
+        if move_state_y == 0:
+            if slope_v > SLOPE_THRESHOLD:
+                dir_y = 'UP'
+                move_state_y = -1
+            elif slope_v < -SLOPE_THRESHOLD:
+                dir_y = 'DOWN'
+                move_state_y = 1
+        else:
+            if abs(current_v) < NEUTRAL_ZONE:
+                dir_y = "CENTRE"
+                move_state_y = 0
 
-    prev_h = current_h
-    prev_v = current_v
+        # Move cursor
+        move_x = move_state_x * MOVE_AMOUNT
+        move_y = move_state_y * MOVE_AMOUNT
+        if move_x != 0 or move_y != 0:
+            pyautogui.moveRel(move_x, move_y)
+
+        # Send data at 60Hz
+        now = time.time()
+        if now - last_send_time >= SEND_INTERVAL:
+            data = {
+                "stat": Stat,
+                "h": current_h,
+                "v": current_v,
+                "dir_x": dir_x,
+                "dir_y": dir_y,
+            }
+            try:
+                await ws.send_data(json.dumps(data))
+                print("data sent")
+            except:
+                pass
+            last_send_time = now
+
+        # Update previous values
+        prev_h = current_h
+        prev_v = current_v
+
+        # Small sleep to yield control
+        await asyncio.sleep(0)
+
+# Run the async loop
+asyncio.run(read_and_send())

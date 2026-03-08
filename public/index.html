@@ -26,24 +26,31 @@
                 <table class="main-content-table">
                     <tr>
                         <td colspan="2">
-                        <h4>   C3-C4 Diff</h4>
-                        <div id="eeg-panel">
-                        <canvas id="eegChart"></canvas>
+                        <h4>  Verical EOG Signal </h4>
+                        <div id="eeg-panel1">
+                        <canvas id="eegChart1" width="500" height="200"></canvas>
                         </div>
                         </td>
                         <td>
-                            <div class="notfound">
-                                <img class='not-found-image' src="../Icons/not-found.png"height='24' width="24">
-                                <p>Sorry Not found</p>
+                            <div class="dpad">
+                                    <div class="arrow up" id="up">↑</div>
+                                    <div class="middle">
+                                        <div class="arrow left" id="left">←</div>
+                                        <div class="center"></div>
+                                        <div class="arrow right" id="right">→</div>
+                                    </div>
+
+                                    <div class="arrow down" id="down">↓</div>
+
                             </div>
                         </td>
                        
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h4>CZ diff</h4>
-                                <div id="eeg-panel1">
-                                <canvas id="eegChart1"></canvas>
+                            <h4>Horizontal EOG Signal</h4>
+                                <div id="eeg-panel2">
+                                <canvas id="eegChart2" width="500" height="200"></canvas>
                                 </div>
                         </td>
                         
@@ -110,7 +117,7 @@
         
         
         
-        <script src="../libs/chart.umd.js"></script>
+        <script src="../libs/smoothie.js"></script>
         <script src="../src/renderer.js"></script>
     </body>
 </html>

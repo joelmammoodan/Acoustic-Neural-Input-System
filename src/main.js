@@ -4,10 +4,27 @@
 const{ app,BrowserWindow,Menu, ipcMain,screen}=require('electron');
 const path=require('path');
 
+const {spawn}=require("child_process");
+
+let pyServer;
+
 
 let mainWindow;
 let settingsWindow=null;
 let panelMode=false;
+
+
+function startPythonServer(script){   
+    pyServer=spawn("python",[script]);
+    pyServer.stdout.on("data", (data) => {
+        console.log("PYTHON:", data.toString());
+    });
+
+    pyServer.stderr.on("data", (data) => {
+        console.error("PYTHON ERROR:", data.toString());
+    });
+
+}
 
 
 function createWindow(){
@@ -78,6 +95,8 @@ ipcMain.handle('toggle-panel',()=>{
 });
 
 app.whenReady().then(()=>{
+    startPythonServer("Python_files/WebSocket_broadcast.py");
+    startPythonServer("Python_files/EOG_control.py")
     createWindow();
 
     app.on('activate', function(){
