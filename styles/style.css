@@ -216,6 +216,11 @@ button{
     outline: none;
 }
 
+
+.main-content-table td{
+    overflow: hidden;
+}
+
 /* Smooth theme transitions */
 #chatbot-panel,
 .chat-header,
@@ -242,6 +247,7 @@ button{
     height: 100%;
     width:100%;
     display: block;
+    overflow: hidden;
 }
 
 #theme-toggle{
@@ -367,7 +373,7 @@ button{
     justify-content:center;
     font-size:30px;
     border-radius:10px;
-    background:#222;
+    background:var(--hover-bg);
     color:#888;
     transition:0.15s;
 }
@@ -383,9 +389,151 @@ button{
     height:40px;
 }
 
+#eeg-settings-panel {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#eeg-settings-panel h3 {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+}
+
+/* 2x2 grid layout */
+.settings-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columns */
+    grid-template-rows: auto auto;  /* 2 rows */
+    gap: 10px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+}
+
+#eeg-settings-panel {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+#eeg-settings-panel h3 {
+    margin-top: 0;
+    text-align: center;
+    color: var(--text-color);
+}
+
+/* 2x2 grid layout */
+.settings-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columns */
+    grid-template-rows: auto auto;  /* 2 rows */
+    gap: 10px;
+    overflow: hidden;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+}
+
+#eeg-settings-panel label {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+#eeg-settings-panel input[type="number"] {
+    width: 90%; /* slightly wider */
+    padding: 6px 10px; /* more breathing room */
+    font-size: 14px;
+    background-color: var(--bg-color); /* soft light background */
+    color: var(--text-color); 
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    box-shadow: none; /* remove all shadows */
+    outline: none;/* dark text for readability */
+    /* subtle border */
+    border-radius: 12px; /* extra roundness */ /* subtle inner depth */
+    transition: all 0.2s ease; /* smooth hover/focus animation */
+}
+
+/* Hover effect */
+#eeg-settings-panel input[type="number"]:hover { /* slightly darker border on hover */
+    background-color: var(--bg-color);
+}
+#eeg-settings-panel button {
+    display: block;
+    width: 40%;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color:var(--text-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#eeg-settings-panel button:hover {
+    background-color: #45a049;
+}
 
 
+/* ESP32 Status Cell Styling */
+.esp32-cell {
+    background-color: var(--bg-color);  /* dark modern panel */
+    color: var(--text-color);             /* light text for readability */
+         /* subtle border */
+    border-radius: 8px;         /* rounded corners */
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start; /* subtle depth */
+    overflow: hidden;
+}
 
+/* Label Styling */
+.esp32-cell label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 6px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    color: var(--text-color);  /* green accent for “active” feel */
+}
 
+/* ESP32 Info Paragraphs */
+#esp32-info p {
+    margin: 2px 0;
+    line-height: 1.4;
+    font-size: 12px;
+    color: var(--text-colors);
+}
 
+/* Optional: highlight value dynamically */
+#esp32-info p span {
+    color: #4caf50; /* green for active/positive values */
+    font-weight: bold;
+}
 
