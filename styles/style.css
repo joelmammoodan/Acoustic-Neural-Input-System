@@ -396,54 +396,18 @@ button{
     width: 100%;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-#eeg-settings-panel h3 {
-    margin-top: 0;
-    text-align: center;
-    color: #333;
-}
-
-/* 2x2 grid layout */
-.settings-grid-2x2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columns */
-    grid-template-rows: auto auto;  /* 2 rows */
-    gap: 10px;
-}
-
-.grid-item {
-    display: flex;
-    flex-direction: column;
-}
-
-#eeg-settings-panel {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
     background-color: var(--bg-color);
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;   /* single column layout */
+    gap: 10px;
 }
 
 #eeg-settings-panel h3 {
     margin-top: 0;
     text-align: center;
     color: var(--text-color);
-}
-
-/* 2x2 grid layout */
-.settings-grid-2x2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columns */
-    grid-template-rows: auto auto;  /* 2 rows */
-    gap: 10px;
-    overflow: hidden;
 }
 
 .grid-item {
@@ -458,34 +422,29 @@ button{
 }
 
 #eeg-settings-panel input {
-    width: 90%; /* slightly wider */
-    padding: 6px 10px; /* more breathing room */
+    width: 100%;
+    padding: 6px 10px;
     font-size: 14px;
-    background-color: var(--bg-color); /* soft light background */
-    color: var(--text-color); 
-    
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 
-    box-shadow: none; /* remove all shadows */
-    outline: none;/* dark text for readability */
-    /* subtle border */
-    border-radius: 12px; /* extra roundness */ /* subtle inner depth */
-    transition: all 0.2s ease; /* smooth hover/focus animation */
+    border: 1px solid #ccc;
+    border-radius: 12px;
+
+    outline: none;
+    box-shadow: none;
 }
 
-/* Hover effect */
-#eeg-settings-panel input[type="number"]:hover { /* slightly darker border on hover */
+#eeg-settings-panel input:hover {
     background-color: var(--bg-color);
 }
+
 #eeg-settings-panel button {
-    display: block;
-    width: 40%;
-    padding: 8px;
-    font-size: 14px;
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
     background-color: #4CAF50;
-    color:var(--text-color);
+    color: var(--text-color);
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -494,7 +453,6 @@ button{
 #eeg-settings-panel button:hover {
     background-color: #45a049;
 }
-
 
 /* ESP32 Status Cell Styling */
 .esp32-cell {
