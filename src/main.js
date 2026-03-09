@@ -14,7 +14,7 @@ let settingsWindow=null;
 let panelMode=false;
 
 
-function startPythonServer(script){   
+function startPython(script){   
     pyServer=spawn("python",[script]);
     pyServer.stdout.on("data", (data) => {
         console.log("PYTHON:", data.toString());
@@ -27,6 +27,8 @@ function startPythonServer(script){
 }
 
 
+
+
 function createWindow(){
     //Menu.setApplicationMenu(null)
     //create the main window on start up
@@ -36,9 +38,9 @@ function createWindow(){
         frame:true,
         webPreferences:{
             //preload done for settings, wont work without it for some reason
-            preload:path.join(__dirname,'preload.js'),
-            nodeIntegration:false,
-            contextIsolation:true
+            //preload:path.join(__dirname,'preload.js'),
+            nodeIntegration:true,
+            contextIsolation:false
         }
         
     });
@@ -48,25 +50,7 @@ function createWindow(){
 
 }
 
-ipcMain.handle('open-settings',()=>{
-    //logic for closing and opening the windows
-    if(settingsWindow && !settingsWindow.isDestroyed()){
-        settingsWindow.show();
-        settingsWindow.focus()        
-        return;
-    }
-    console.log(__dirname)
-    //new window for settings
-    settingsWindow=new BrowserWindow({
-        width:500,
-        height:400,
-        parent:mainWindow,
-        modal:false,
-        title:"Settings"
-    });
 
-    settingsWindow.loadFile('public/settings.html')
-})
 
 
 //for the chatbot panel
@@ -94,9 +78,11 @@ ipcMain.handle('toggle-panel',()=>{
     panelMode=!panelMode;
 });
 
+
+
 app.whenReady().then(()=>{
-    startPythonServer("Python_files/WebSocket_broadcast.py");
-    startPythonServer("Python_files/EOG_control.py")
+    startPython("Python_files/WebSocket_broadcast.py");
+    startPython("Python_files/EOG_control.py")
     createWindow();
 
     app.on('activate', function(){
@@ -110,4 +96,6 @@ app.on('window-all-closed',()=>{
         app.quit();
     }
 });
+
+
 

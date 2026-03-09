@@ -457,7 +457,7 @@ button{
     color: var(--text-color);
 }
 
-#eeg-settings-panel input[type="number"] {
+#eeg-settings-panel input {
     width: 90%; /* slightly wider */
     padding: 6px 10px; /* more breathing room */
     font-size: 14px;

@@ -1,0 +1,5 @@
+{
+    "moveAmount": 2,
+    "slopeThreshold": 0.1,
+    "neutralZone": 0.06
+}

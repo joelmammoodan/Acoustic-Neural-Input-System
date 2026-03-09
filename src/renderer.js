@@ -1,4 +1,5 @@
-
+const { ipcRenderer } = require("electron");
+const fs = require("fs");
 
 // DOM Elements
 const themeBtn = document.getElementById('theme-toggle');
@@ -18,6 +19,16 @@ const braindiv=document.getElementById('brainmode-div');
 const voicediv=document.getElementById('voicemode-div');
 const modeHoverText=document.getElementById("mode-hover-text")
 const settingsbtn=document.getElementById("settings-button");
+
+let count=0;
+
+
+
+const ws = new WebSocket("ws://localhost:8765");
+
+ws.addEventListener('open', () => {
+    console.log("WebSocket connected");
+});
 //const brainBtn = document.getElementById('brainBtn');
 //const voiceBtn = document.getElementById('voiceBtn');
 
@@ -210,6 +221,7 @@ window.addEventListener('DOMContentLoaded', () => {
         maxValue: 1,
         minValue: -1,
         interpolation: 'linear',
+        maxDataSetLength: 500
     });
 
     const eegChart2 = new SmoothieChart({
@@ -219,6 +231,7 @@ window.addEventListener('DOMContentLoaded', () => {
         maxValue: 1,
         minValue: -1,
         interpolation: 'linear',
+        maxDataSetLength: 500
     });
 
     eegChart1.streamTo(canvas1, 1000);
@@ -232,19 +245,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // WebSocket
     
-   const ws = new WebSocket("ws://localhost:8765");
 
-    ws.addEventListener('open', () => {
-        console.log("WebSocket connected");
-    });
 
     ws.onmessage = (event) => {
         const msg = JSON.parse(event.data);
-        if (msg.stat !== "ACTIVE") return;
+        if (msg.stat !== "ACTIVE"){
+            console.log("NOT ACTIVE");
+            return;
+        }
 
-        verticalSeries.append(Date.now(), msg.v);
-        horizontalSeries.append(Date.now(), msg.h);
+        const now = Date.now();
+        count++
+        verticalSeries.append(now, msg.v);
+        horizontalSeries.append(now, msg.h);
+        showDirection(msg.dir_x,msg.dir_y)
     };
+
+    document.getElementById("save-settings").addEventListener("click", () => {
+        const settings = getSettings();
+        saveSettings(settings);
+        ipcRenderer.send("restart-python");
+    });
 });
 
 //for the settings button on top bar
@@ -271,4 +292,29 @@ function showDirection(dir_x,dir_y){
 
 }
 
+
+function getSettings() {
+
+    const settings = {
+        moveAmount: parseFloat(document.getElementById("move-amount").value),
+        slopeThreshold: parseFloat(document.getElementById("slope-threshold").value),
+        neutralZone: parseFloat(document.getElementById("neutral-zone").value)
+    };
+
+    return settings;
+}
+
+
+
+
+function saveSettings(settings){
+    console.log("Settings saved");
+    fs.writeFileSync(
+        "settings.json",
+        JSON.stringify(settings, null, 4)
+    );
+
+    
+
+}
 

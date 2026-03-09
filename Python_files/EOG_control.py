@@ -3,16 +3,22 @@ import pyautogui
 import asyncio
 import json
 import time
+import os
+import sys
 
 import WebSocket_broadcast as ws  # your WebSocket module
+
+
+def load_settings():
+    with open("settings.json", "r") as f:
+        return json.load(f)
+
+
+
 
 SERIAL_PORT = "COM3"
 BAUD_RATE = 115200
 
-MOVE_AMOUNT = 2
-SLOPE_THRESHOLD = 0.1
-NEUTRAL_ZONE = 0.06
-SEND_INTERVAL = 1/120 # 60 Hz
 
 pyautogui.PAUSE = 0
 
@@ -26,14 +32,25 @@ Stat = 'ERROR'
 dir_x = "CENTRE"
 dir_y = "CENTRE"
 
+SEND_INTERVAL = 1/1
+
 print("Listening...")
 
 async def read_and_send():
+    
     global prev_h, prev_v, move_state_x, move_state_y, Stat, dir_x, dir_y
     ser = None
     last_send_time = time.time()
 
     while True:
+        settings = load_settings()
+
+        MOVE_AMOUNT = settings["moveAmount"]
+        SLOPE_THRESHOLD = settings["slopeThreshold"]
+        NEUTRAL_ZONE = settings["neutralZone"]
+        
+
+        
         # Connect to serial if not connected
         if ser is None or not ser.is_open:
             try:
@@ -113,6 +130,7 @@ async def read_and_send():
         now = time.time()
         if now - last_send_time >= SEND_INTERVAL:
             data = {
+                "type":'VALUE',
                 "stat": Stat,
                 "h": current_h,
                 "v": current_v,
@@ -121,8 +139,9 @@ async def read_and_send():
             }
             try:
                 await ws.send_data(json.dumps(data))
-                print("data sent")
+                #print("data sent")
             except:
+                print("error")
                 pass
             last_send_time = now
 
@@ -131,7 +150,9 @@ async def read_and_send():
         prev_v = current_v
 
         # Small sleep to yield control
-        await asyncio.sleep(0)
+        #await asyncio.sleep(0)
+
+
 
 # Run the async loop
 asyncio.run(read_and_send())
