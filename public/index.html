@@ -12,17 +12,14 @@
             </div>
             <div class="spacer"></div>
             <div class="right_items">
-                <button id="settings-button" class="top-bar-buttons">
-                    <img id="settings-icon" src="..\Icons\setting-black.png" width="24" height="24">
-                </button>
+                
                 <button id="theme-toggle">
                     <img id='mode' src="../Icons/moon.png" width="24" height="24">
                 </button>
-                <button id="move-to-brain"><img id='brain-img' class="mode-icon active" src='../Icons/brain_white.png' width="20" height="20"><img id='voice-img' class="mode-icon" src='../Icons/voice-white.png' width="20" height="20"><p id='mode-hover-text' class="hover-text">Switch to brain</p></button>
             </div>
         </div>
         <div id="main-content">
-            <div id='brainmode-div'class="main-content-container">
+            <div id='brainmode-div'class="main-content-container active">
                 <table class="main-content-table">
                     <tr>
                         <td colspan="2">
@@ -76,7 +73,7 @@
                                     <input type="number" id="neutral-zone" value="0.06" step="0.01">
                                 </div>
 
-                                
+                                <br>                            
 
                                     <button id="save-settings">Save</button>
                                 </div>
@@ -89,7 +86,7 @@
                 </table>
                 
             </div>
-            <div id='voicemode-div' class="main-content-container active">
+            <div id='voicemode-div' class="main-content-container">
                 <div class="notfound">
                     <img class='not-found-image' src="../Icons/not-found.png"height='24' width="24">
                     <p>Sorry Not found</p>

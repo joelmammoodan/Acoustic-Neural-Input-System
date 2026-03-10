@@ -7,7 +7,8 @@ const icon = document.getElementById('mode');
 const brain_icon=document.getElementById('brain-img');
 const voice_icon=document.getElementById('voice-img');
 const currentTheme = localStorage.getItem('theme');
-let currentMode=localStorage.getItem('Mode');
+//let currentMode=localStorage.getItem('Mode');
+let currentMode='brain';
 
 const panelToggle = document.getElementById("panel-toggle");
 const panelClosed=document.getElementById('panel-close');
@@ -48,15 +49,15 @@ if(currentTheme === 'dark'){
     //set the attribute for html with dark
     document.documentElement.setAttribute('data-theme','dark');
     icon.src = '../Icons/sun.png';
-    brain_icon.src='../Icons/brain_black.png';
-    voice_icon.src='../Icons/voice-black.png';
+    //brain_icon.src='../Icons/brain_black.png';
+    //voice_icon.src='../Icons/voice-black.png';
     
 
 } else {
     document.documentElement.removeAttribute('data-theme');
     icon.src = '../Icons/moon.png';
-    brain_icon.src='../Icons/brain_white.png';
-    voice_icon.src='../Icons/voice-white.png'; 
+    //brain_icon.src='../Icons/brain_white.png';
+    //voice_icon.src='../Icons/voice-white.png'; 
 
 }
 
@@ -68,13 +69,13 @@ themeBtn.addEventListener('click', () => {
         document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('theme','light');
         icon.src = '../Icons/moon.png';
-        brain_icon.src='../Icons/brain_white.png';
+        //brain_icon.src='../Icons/brain_white.png';
         voice_icon.src='../Icons/voice-white.png'; 
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
         icon.src = '../Icons/sun.png';
-        brain_icon.src='../Icons/brain_black.png';
+        //brain_icon.src='../Icons/brain_black.png';
         voice_icon.src='../Icons/voice-black.png';
     }
 });
@@ -88,36 +89,36 @@ function switchMode(a, b) {
 
 //initial checking on startup and changing accrodingly
 //the mode is stored in localStorage
-if(currentMode=='brain'){
-    switchMode(voicediv,braindiv);
-    switchMode(voice_icon,brain_icon);
-    console.log('Switched to brain');
-}else{
-    switchMode(braindiv,voicediv);
-    switchMode(brain_icon,voice_icon);
-    console.log("switched to voice");
-}
+//if(currentMode=='brain'){
+//    switchMode(voicediv,braindiv);
+//    switchMode(voice_icon,brain_icon);
+//    console.log('Switched to brain');
+//}else{
+//    switchMode(braindiv,voicediv);
+//    switchMode(brain_icon,voice_icon);
+//    console.log("switched to voice");
+//}
 
 
 //to chnage the mode using the button on top bar
-modeChangeBtn.addEventListener('click',()=>{
-    currentMode=localStorage.getItem("Mode");
-    if(currentMode=='brain'){
-        switchMode(braindiv,voicediv);
-        switchMode(brain_icon,voice_icon);
-        currentMode='voice';
-        localStorage.setItem('Mode','voice');
-    }else{
-        switchMode(voicediv,braindiv);
-        switchMode(voice_icon,brain_icon);
-        currentMode='brain';
-        localStorage.setItem('Mode','brain');
-    }
-
-    console.log(currentMode);
-    
-   
-});
+//modeChangeBtn.addEventListener('click',()=>{
+//    currentMode=localStorage.getItem("Mode");
+//    if(currentMode=='brain'){
+//        switchMode(braindiv,voicediv);
+//        switchMode(brain_icon,voice_icon);
+//        currentMode='voice';
+//        localStorage.setItem('Mode','voice');
+//    }else{
+//        switchMode(voicediv,braindiv);
+//        switchMode(voice_icon,brain_icon);
+//        currentMode='brain';
+//        localStorage.setItem('Mode','brain');
+//    }
+//
+//    console.log(currentMode);
+//    
+//   
+//});
 
 
 // ---------------------------
