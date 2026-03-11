@@ -17,7 +17,6 @@ void loop() {
 
   float hor_normalized = filter(horizontal_raw, 0);
   float ver_normalized = filter(vertical_raw, 1);
-
   Serial.print(hor_normalized);
   Serial.print(",");
   Serial.println(ver_normalized);

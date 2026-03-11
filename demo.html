@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assistive Communication Demo</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    margin-top:100px;
+}
+
+.word{
+    display:inline-block;
+    padding:40px;
+    margin:20px;
+    font-size:40px;
+    background:#e6e6e6;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.word:hover{
+    background:#cce5ff;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Communication Demo</h1>
+
+<div class="word" onmouseenter="speak('Yes')">YES</div>
+<div class="word" onmouseenter="speak('No')">NO</div>
+<div class="word" onmouseenter="speak('Maybe')">MAYBE</div>
+
+<script>
+function speak(text){
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.rate = 1;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
+}
+</script>
+
+</body>
+</html>
