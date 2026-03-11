@@ -82,7 +82,8 @@ ipcMain.handle('toggle-panel',()=>{
 
 app.whenReady().then(()=>{
     startPython("Python_files/WebSocket_broadcast.py");
-    startPython("Python_files/EOG_control.py")
+    startPython("Python_files/EOG_control.py");
+    startPython("Python_files/main.py");   
     createWindow();
 
     app.on('activate', function(){
