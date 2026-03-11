@@ -1,5 +1,5 @@
 """
-main.py — Voice pipeline with concurrent audio capture and transcription.
+main.py -- Voice pipeline with concurrent audio capture and transcription.
 
 Architecture
 ────────────
@@ -14,6 +14,12 @@ import queue
 import threading
 import signal
 import sys
+
+# Force UTF-8 output on Windows consoles (cp1252 chokes on unicode)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from audio_input import record_utterance
 from whisper_asr import transcribe_audio
@@ -38,7 +44,7 @@ _shutdown = threading.Event()
 
 def capture_loop() -> None:
     """Continuously capture utterances and push them onto the audio queue."""
-    print("🎙️  Capture thread started.")
+    print("[MIC]  Capture thread started.")
     while not _shutdown.is_set():
         audio = record_utterance(timeout=CAPTURE_TIMEOUT_S)
         if audio is None:
@@ -48,17 +54,17 @@ def capture_loop() -> None:
             # so the mic never stalls waiting for a slow GPU.
             _audio_queue.put_nowait(audio)
         except queue.Full:
-            print("⚠️  Audio queue full — dropping oldest clip.")
+            print("[WARN]  Audio queue full -- dropping oldest clip.")
             try:
                 _audio_queue.get_nowait()
             except queue.Empty:
                 pass
             _audio_queue.put_nowait(audio)
 
-    # Poison pill — wake up transcription thread(s)
+    # Poison pill -- wake up transcription thread(s)
     for _ in range(TRANSCRIBE_WORKERS):
         _audio_queue.put(None)
-    print("🎙️  Capture thread exiting.")
+    print("[MIC]  Capture thread exiting.")
 
 
 # ── Transcription + intent thread ─────────────────────────────────────────────
@@ -68,7 +74,7 @@ def capture_loop() -> None:
 # Prevents double-triggers from overlapping VAD segments or mic bleed.
 INTENT_COOLDOWN: dict[str, float] = {
     "open_app":   5.0,   # opening an app should never double-fire
-    "close_app":  5.0,   # same — destructive action
+    "close_app":  5.0,   # same -- destructive action
     "click":      3.0,   # UI clicks need time for the UI to respond
     "scroll_up":  1.0,
     "scroll_down":1.0,
@@ -88,7 +94,7 @@ def transcribe_loop(worker_id: int = 0) -> None:
     import time as _time
     _last_fired: dict[str, float] = {}   # intent → epoch time of last execution
 
-    print(f"🧠  Transcription worker {worker_id} started.")
+    print(f"[AI]  Transcription worker {worker_id} started.")
     while not _shutdown.is_set():
         try:
             audio = _audio_queue.get(timeout=1.0)
@@ -101,18 +107,18 @@ def transcribe_loop(worker_id: int = 0) -> None:
         try:
             text = transcribe_audio(audio)
         except Exception as exc:
-            print(f"❌  Transcription error: {exc}")
+            print(f"[ERR]  Transcription error: {exc}")
             continue
 
         if not text:
             print("(no speech detected)")
             continue
 
-        print(f"📝  You said: {text!r}")
+        print(f"[TEXT]  You said: {text!r}")
 
         try:
             intent, normalized, confidence = handle_intent(text)
-            print(f"🎯  Intent: {intent}  (confidence: {confidence:.2f})")
+            print(f"[INTENT]  Intent: {intent}  (confidence: {confidence:.2f})")
 
             # ── Debounce check ────────────────────────────────────────────────
             now     = _time.monotonic()
@@ -121,7 +127,7 @@ def transcribe_loop(worker_id: int = 0) -> None:
             elapsed = now - last
 
             if elapsed < cooldown:
-                print(f"⏱️  Debounced '{intent}' "
+                print(f"[WAIT]  Debounced '{intent}' "
                       f"(fired {elapsed:.1f}s ago, cooldown {cooldown}s).")
                 continue
 
@@ -129,15 +135,15 @@ def transcribe_loop(worker_id: int = 0) -> None:
             route_intent(intent, normalized, confidence)
 
         except Exception as exc:
-            print(f"❌  Intent/routing error: {exc}")
+            print(f"[ERR]  Intent/routing error: {exc}")
 
-    print(f"🧠  Transcription worker {worker_id} exiting.")
+    print(f"[AI]  Transcription worker {worker_id} exiting.")
 
 
 # ── Graceful shutdown ─────────────────────────────────────────────────────────
 
 def _handle_signal(sig, frame):
-    print("\n⛔  Shutting down…")
+    print("\n[HALT]  Shutting down...")
     _shutdown.set()
 
 
@@ -147,7 +153,7 @@ def main() -> None:
     signal.signal(signal.SIGINT, _handle_signal)
     signal.signal(signal.SIGTERM, _handle_signal)
 
-    print("✅  System ready — just speak.\n")
+    print("[OK]  System ready -- just speak.\n")
 
     # Start transcription workers first so the queue is always drained
     workers: list[threading.Thread] = []
@@ -167,7 +173,7 @@ def main() -> None:
     for t in workers:
         t.join(timeout=5)
 
-    print("👋  Goodbye.")
+    print("[BYE]  Goodbye.")
     sys.exit(0)
 
 

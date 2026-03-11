@@ -1,14 +1,14 @@
 """
-intent_server.py — Run this ONCE. Loads Phi-2 + LoRA into GPU memory and
+intent_server.py -- Run this ONCE. Loads Phi-2 + LoRA into GPU memory and
 stays alive as a background process. main.py connects to it via a local
 TCP socket, so the model is never reloaded between runs.
 
 Usage
 ─────
-  # Terminal 1 — start the server (do this once after boot)
+  # Terminal 1 -- start the server (do this once after boot)
   python intent_server.py
 
-  # Terminal 2 — run the voice pipeline as many times as you like
+  # Terminal 2 -- run the voice pipeline as many times as you like
   python main.py
 
 The server listens on 127.0.0.1:62199 (localhost only, not exposed externally).
@@ -69,7 +69,7 @@ _PROMPT_TEMPLATE = """\
 Classify the user command into exactly one intent label.
 Valid labels: open_app, close_app, click, scroll_up, scroll_down, \
 type_text, press_key, screenshot, search, ui_list, not_possible_yet.
-Reply with the label only — no explanation.
+Reply with the label only -- no explanation.
 
 ### Input:
 {text}
@@ -79,7 +79,7 @@ Reply with the label only — no explanation.
 
 # ── Load model ────────────────────────────────────────────────────────────────
 device = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"[intent_server] Loading Phi-2 on {device}…")
+print(f"[intent_server] Loading Phi-2 on {device}...")
 
 tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
 tokenizer.pad_token = tokenizer.eos_token
@@ -108,12 +108,12 @@ else:
 model = PeftModel.from_pretrained(base_model, LORA_MODEL, is_trainable=False)
 model.eval()
 
-print("[intent_server] Running warm-up…")
+print("[intent_server] Running warm-up...")
 with torch.no_grad():
     _wu = tokenizer("open notepad", return_tensors="pt").to(device)
     model.generate(**_wu, max_new_tokens=2, do_sample=False,
                    pad_token_id=tokenizer.eos_token_id)
-print(f"[intent_server] Ready — listening on {HOST}:{PORT}")
+print(f"[intent_server] Ready -- listening on {HOST}:{PORT}")
 
 
 # ── Inference ─────────────────────────────────────────────────────────────────
@@ -199,7 +199,7 @@ def main() -> None:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind((HOST, PORT))
         srv.listen(BACKLOG)
-        print(f"[intent_server] Accepting connections…  (Ctrl+C to stop)")
+        print(f"[intent_server] Accepting connections...  (Ctrl+C to stop)")
         try:
             while True:
                 conn, addr = srv.accept()

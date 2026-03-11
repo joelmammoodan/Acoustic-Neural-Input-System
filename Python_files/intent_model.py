@@ -1,5 +1,5 @@
 """
-intent_model.py — Intent classification client.
+intent_model.py -- Intent classification client.
 
 Preferred path : connects to intent_server.py (127.0.0.1:62199) which keeps
                  Phi-2 loaded in GPU memory permanently → zero reload time.
@@ -28,8 +28,8 @@ import torch
 # ── Server connection config ──────────────────────────────────────────────────
 _SERVER_HOST     = "127.0.0.1"
 _SERVER_PORT     = 62199
-_CONNECT_TIMEOUT = 1.0    # seconds — how long to wait when checking if server is up
-_RECV_TIMEOUT    = 10.0   # seconds — max wait for a classification response
+_CONNECT_TIMEOUT = 1.0    # seconds -- how long to wait when checking if server is up
+_RECV_TIMEOUT    = 10.0   # seconds -- max wait for a classification response
 
 # ── Shared socket (one persistent connection reused across calls) ─────────────
 _sock: socket.socket | None = None
@@ -46,7 +46,7 @@ def _try_connect() -> bool:
         _sock = s
         _using_server = True
         print(f"[intent_model] Connected to intent_server on "
-              f"{_SERVER_HOST}:{_SERVER_PORT} — model already loaded.")
+              f"{_SERVER_HOST}:{_SERVER_PORT} -- model already loaded.")
         return True
     except OSError:
         return False
@@ -70,7 +70,7 @@ def _server_classify(text: str) -> tuple[str, str, float] | None:
                 return None
             return data["intent"], data["normalized"], data["confidence"]
         except Exception as exc:
-            print(f"[intent_model] Server comm error: {exc} — falling back to local.")
+            print(f"[intent_model] Server comm error: {exc} -- falling back to local.")
             try:
                 _sock.close()
             except Exception:
@@ -100,7 +100,7 @@ def _ensure_local_model():
         LORA_MODEL = r"C:\Users\User\Documents\Mini project\Model\lora-training\phi2_intent_lora"
 
         _local_device = "cuda" if torch.cuda.is_available() else "cpu"
-        print(f"[intent_model] Server not found — loading Phi-2 locally on {_local_device}...")
+        print(f"[intent_model] Server not found -- loading Phi-2 locally on {_local_device}...")
 
         tok = AutoTokenizer.from_pretrained(BASE_MODEL)
         tok.pad_token = tok.eos_token
@@ -140,7 +140,7 @@ _PROMPT_TEMPLATE = """\
 Classify the user command into exactly one intent label.
 Valid labels: open_app, close_app, click, scroll_up, scroll_down, \
 type_text, press_key, screenshot, search, ui_list, not_possible_yet.
-Reply with the label only — no explanation.
+Reply with the label only -- no explanation.
 
 ### Input:
 {text}
@@ -221,7 +221,7 @@ def handle_intent(text: str) -> tuple[str, str, float]:
     if normalized.rstrip(".,!?") in _FILLERS or all(w in _FILLERS for w in words):
         return "not_possible_yet", normalized, 0.0
 
-    # Rule engine — always fast, no network
+    # Rule engine -- always fast, no network
     for pattern, intent in _RULES:
         if pattern.search(normalized):
             return intent, normalized, 1.0

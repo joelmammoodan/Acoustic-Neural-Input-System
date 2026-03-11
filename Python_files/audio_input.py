@@ -6,7 +6,7 @@ import threading
 
 SAMPLE_RATE = 16000
 CHANNELS = 1
-FRAME_DURATION_MS = 20          # 20 ms frames — best WebRTC VAD accuracy
+FRAME_DURATION_MS = 20          # 20 ms frames -- best WebRTC VAD accuracy
 FRAME_SIZE = int(SAMPLE_RATE * FRAME_DURATION_MS / 1000)   # 320 samples
 
 # How many silent frames before we consider speech ended
@@ -17,7 +17,7 @@ SILENCE_FRAMES_THRESHOLD = 20
 PRE_ROLL_FRAMES = 8             # 160 ms
 
 # Minimum voiced frames required before we accept a segment
-MIN_SPEECH_FRAMES = 5           # 100 ms — ignores micro-glitches
+MIN_SPEECH_FRAMES = 5           # 100 ms -- ignores micro-glitches
 
 vad = webrtcvad.Vad(2)          # aggressiveness 0-3; 2 is a good balance
 
@@ -105,11 +105,11 @@ def record_utterance(
         blocksize=FRAME_SIZE,
         callback=callback,
     ):
-        print("🎤 Listening…")
+        print("[MIC] Listening...")
         triggered = _done.wait(timeout=timeout)
 
     if not triggered:
-        # Timeout — flush whatever we have
+        # Timeout -- flush whatever we have
         with _lock:
             _result[0] = _flush()
 
@@ -161,7 +161,7 @@ def stop_recording() -> np.ndarray | None:
 
     peak = np.max(np.abs(audio))
     if peak < 0.01:
-        print("⚠️  Audio too quiet, ignoring.")
+        print("[WARN]  Audio too quiet, ignoring.")
         return None
 
     return audio / (peak + 1e-9) * 0.9
