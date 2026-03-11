@@ -1,5 +1,5 @@
 {
-    "moveAmount": 2,
-    "slopeThreshold": 0.1,
-    "neutralZone": 0.1
+    "moveAmount": 1,
+    "slopeThreshold": 0.05,
+    "neutralZone": 0.06
 }
