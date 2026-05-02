@@ -1,160 +1,100 @@
-🎙️🧠 Voice & EEG Assisted Navigational Accessibility System
-  A multimodal accessibility system enabling hands-free computer navigation using voice commands and EEG-based signals, designed for users with motor impairments.
+🎙️🧠 Acoustic Neural Input System (ANIS)
+
+A multimodal human–computer interaction system enabling hands-free computer control using voice commands and bio-signal inputs, designed for accessibility-focused interaction.
+
+---
 
 📌 Project Overview
-  This project proposes and implements a hybrid human–computer interaction system that allows users to control and navigate a computer system using natural voice commands and brain signal inputs (EEG).
-  The system focuses on accessibility-first design, enabling users with physical disabilities to interact with standard desktop environments without relying on traditional input devices such as a mouse or keyboard.
-  This is developed as a BTech Mini Project using only free and open-source tools, optimized to run on consumer-grade hardware without GPU dependency.
-  
-  🎯 Objectives
-    Enable hands-free system navigation using voice commands
-    Integrate EEG-based intent detection as an alternative input method
-    Design a deterministic and safe command execution pipeline  
-    Provide overlay-based visual navigation aids (grid, number overlays)
-    Ensure low-latency, real-time interaction
-    Maintain modularity for future assistive extensions
+
+ANIS is an accessibility-driven system that allows users to interact with a computer without traditional input devices.
+
+It combines:
+- Voice-based command execution
+- Conversational AI assistant mode
+- Bio-signal-based input using EOG/EEG hardware
+
+The system is built using open-source tools and low-cost hardware, making it suitable for real-world assistive applications and experimentation.
+
+---
 
 🧩 Key Features
-  Voice Navigation
-    Command-based cursor control
-    Application launch and window management
-    Scroll, click, select, and grid-based navigation
-    Ambiguity handling using validation layers
 
-  EEG Assistance (Experimental)
-    Real-time EEG signal acquisition
-    Signal preprocessing and feature extraction
-    Mapping EEG patterns to navigation intents
-    Acts as a fallback or complementary control mode
+### 🎤 Voice Command System
+- Speech-to-text using Whisper  
+- LLM-based intent detection  
+- Execution of system-level commands  
+- Validation layer for safe operation  
 
-  System Overlays
-    Grid overlay for precise screen selection
-    Numbered UI overlays for accessibility
-    Non-intrusive, always-on-top rendering
+---
 
-+---------------------------------------------------+
-|           VOICE INPUT & PROCESSING                |
-|---------------------------------------------------|
-|  Voice Activity Detection (VAD)                   |
-|  Voice Input                                     |
-|  Speech-to-Text (STT)                             |
-|  LLM Engine (Intent & Context Detection)          |
-|  Parsed JSON Output                               |
-+---------------------------+-----------------------+
-                            |
-                            v
-+---------------------------------------------------+
-|           COMMAND EXECUTION PIPELINE               |
-|---------------------------------------------------|
-|  Parsed JSON Input                                |
-|  Category Router                                  |
-|                                                   |
-|  +------------------+  +----------------------+  |
-|  | Navigation       |  | Information          |  |
-|  | Commands         |  | Commands              |  |
-|  +------------------+  +----------------------+  |
-|  | Control Commands |                           |
-|  +------------------+                           |
-|                                                   |
-|  Validation Layer (Whitelist / Safety Rules)      |
-|                                                   |
-|  Application Executor (OS Actions)                |
-|  Confirmation Feedback (Audio / Visual)           |
-+---------------------------+-----------------------+
-                            |
-                            v
-+---------------------------------------------------+
-|                NAVIGATION SIGNALS                  |
-+---------------------------+-----------------------+
-                            |
-                            v
-+---------------------------------------------------+
-|               EXECUTE NAVIGATION                   |
-|---------------------------------------------------|
-|  Grid Overlay (3x3 / 5x5)                          |
-|  Move Cursor to Cell                               |
-|  Click / Scroll                                   |
-|  Visual + Audio Feedback                           |
-+---------------------------------------------------+
+### 🤖 Assistant Mode
+- Activated using the keyword **"assistant"**  
+- Runs a conversational loop using Groq LLM  
+- Maintains short-term context  
+- Supports natural queries and exit commands  
 
+---
 
-                 ┌────────────────────────────┐
-                 │        DASHBOARD            │
-                 │----------------------------│
-                 │  System Control Visuals     │
-                 │  Audio Waveform             │
-                 │  Raw Signal Plots            │
-                 │  Control Visuals             │
-                 └─────────────┬──────────────┘
-                               |
-                               v
-+---------------------------------------------------+
-|                  COMMUNICATIONS                    |
-+---------------------------------------------------+
+### 🧠 Bio-Signal Input (EOG / EEG)
 
+- Signal acquisition using:
+  - BioAmp EXG Pill  
+  - ESP32 ADC interface  
 
-+---------------------------------------------------+
-|             EEG SIGNAL ACQUISITION                 |
-|---------------------------------------------------|
-|  Dry/Wet Electrodes                                |
-|  BioAmp EXG Pill                                   |
-|  ESP32 ADC                                         |
-|  Computer (USB / Serial Input)                     |
-+---------------------------+-----------------------+
-                            |
-                            v
-+---------------------------------------------------+
-|              SIGNAL PREPROCESSING                  |
-|---------------------------------------------------|
-|  Remove Offsets                                    |
-|  Bandpass Filter                                   |
-|  Remove External Noise                             |
-|  Signal Smoothing                                  |
-|  (Python Processing)                               |
-+---------------------------+-----------------------+
-                            |
-                            v
-+---------------------------------------------------+
-|               COMMAND MAPPING                      |
-|---------------------------------------------------|
-|  Window Segmentation                               |
-|  Baseline Reference                                |
-|  Decision Logic                                    |
-|                                                   |
-|  Rule-Based Mapping                                |
-|  OR                                                |
-|  Classifier Model                                  |
-|                                                   |
-|  Generated Command                                 |
-+---------------------------+-----------------------+
-                            |
-                            v
-                   (Feeds into Command
-                    Execution Pipeline)
+- Processing pipeline:
+  - Signal filtering and smoothing  
+  - Noise reduction  
+  - Direction / pattern detection  
 
+- Maps signals to:
+  - Cursor movement  
+  - Navigation commands  
 
-🧠 Use Cases
-  Users with motor disabilities
-  Hands-free system operation
-  Assistive navigation in educational or workplace setups
-  Research in multimodal human–computer interaction
+⚠️ Note:  
+This module is functional but experimental, and accuracy depends on calibration and hardware conditions.
+
+---
+
+### ⚡ Real-Time UI
+
+- WebSocket-based live communication  
+- Displays:
+  - Voice transcripts  
+  - Assistant responses  
+  - Bio-signal visualizations  
+- Includes animated feedback elements  
+
+---
+
+🧠 System Architecture
+
+Voice Pipeline:  
+Mic → Whisper → LLM → Intent → Execution  
+
+Assistant Mode:  
+Trigger → Conversational Loop → Response → TTS  
+
+Bio-Signal Pipeline:  
+Electrodes → BioAmp → ESP32 → Processing → Command Mapping  
+
+Frontend:  
+Backend → WebSocket → Live UI  
+
+---
 
 🚧 Limitations
-  EEG accuracy depends on hardware quality
-  Voice recognition performance affected by noise
-  EEG module is experimental and under active improvement
-  Not intended for safety-critical system control
 
-🔮 Future Enhancements
-  Custom-trained intent classification models
-  Adaptive learning for user-specific EEG patterns
-  Multilingual voice support
-  Mobile companion application
-  Improved calibration workflows
+- Bio-signal accuracy depends heavily on hardware quality and calibration  
+- EEG/EOG signals are noisy and require controlled conditions  
+- Voice recognition is affected by background noise  
+- System is not suitable for safety-critical environments  
 
-📚 Academic Relevance
-This project aligns with topics in:
-  Assistive Technologies
-  Human–Computer Interaction (HCI)
-  AI-driven Accessibility Systems
-  Multimodal Input Processing
+---
+
+🔮 Future Scope
+
+- Improved EEG-based intent classification  
+- Adaptive calibration for bio-signal inputs  
+- Multi-step command planning  
+- Overlay-based persistent UI  
+- Parallel processing for multimodal inputs  
