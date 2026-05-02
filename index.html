@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ANIS — Acoustic Neural Input System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════ NAV ══════════════════════════════════ -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">ANIS</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#tech">Tech</a></li>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#demo" class="nav-cta">View Demo</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <canvas id="heroCanvas"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-badge reveal-fade">
+        <span class="badge-dot"></span>
+        Next-Gen HCI Platform
+      </div>
+
+      <div class="orb-wrap">
+        <canvas id="orbCanvas"></canvas>
+      </div>
+
+      <h1 class="hero-title reveal-up">ANIS</h1>
+      <p class="hero-sub reveal-up delay-1">Acoustic Neural Input System</p>
+      <p class="hero-tagline reveal-up delay-2">Redefining Human–Computer Interaction</p>
+
+      <div class="hero-cta reveal-up delay-3">
+        <button class="btn-primary" onclick="scrollToSection('demo')">
+          <span>View Demo</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+        <button class="btn-ghost" onclick="scrollToSection('features')">Explore Features</button>
+      </div>
+
+      <div class="hero-stats reveal-up delay-4">
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Input Modalities</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">&lt;50ms</span>
+          <span class="stat-label">Response Latency</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Hands-Free</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ TICKER ══════════════════════════════════ -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>Voice Commands</span><span class="sep">—</span>
+      <span>Eye Tracking</span><span class="sep">—</span>
+      <span>Neural LLM</span><span class="sep">—</span>
+      <span>Real-Time TTS</span><span class="sep">—</span>
+      <span>Whisper STT</span><span class="sep">—</span>
+      <span>Groq API</span><span class="sep">—</span>
+      <span>LiveKit Streaming</span><span class="sep">—</span>
+      <span>Intent Classification</span><span class="sep">—</span>
+      <span>Voice Commands</span><span class="sep">—</span>
+      <span>Eye Tracking</span><span class="sep">—</span>
+      <span>Neural LLM</span><span class="sep">—</span>
+      <span>Real-Time TTS</span><span class="sep">—</span>
+      <span>Whisper STT</span><span class="sep">—</span>
+      <span>Groq API</span><span class="sep">—</span>
+      <span>LiveKit Streaming</span><span class="sep">—</span>
+      <span>Intent Classification</span><span class="sep">—</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ ABOUT ══════════════════════════════════ -->
+  <section id="about" class="about section">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="label reveal-fade">001 — About</p>
+        <h2 class="section-title reveal-up">What is<br><em>ANIS?</em></h2>
+        <p class="body-text reveal-up delay-1">
+          ANIS is a multimodal human-computer interaction system that fuses
+          voice, large language models, and bio-signal eye tracking into one
+          seamless, hands-free interface.
+        </p>
+        <p class="body-text reveal-up delay-2">
+          Built for the future of accessibility and productivity — where your
+          voice, gaze, and intent become the keyboard, mouse, and command line.
+        </p>
+        <div class="about-pills reveal-up delay-3">
+          <span class="pill">Hands-Free</span>
+          <span class="pill">AI-Powered</span>
+          <span class="pill">Real-Time</span>
+          <span class="pill">Accessible</span>
+        </div>
+      </div>
+
+      <div class="about-visual reveal-fade delay-2">
+        <div class="visual-frame">
+          <!-- SVG: Abstract neural/wave illustration -->
+          <svg class="neural-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- Animated waveform rings -->
+            <circle cx="250" cy="250" r="80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="130" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="230" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+            <!-- Mic icon center -->
+            <rect x="232" y="205" width="36" height="60" rx="18" fill="none" stroke="white" stroke-width="2.5"/>
+            <path d="M215 265 Q215 295 250 295 Q285 295 285 265" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="250" y1="295" x2="250" y2="315" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="234" y1="315" x2="266" y2="315" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+
+            <!-- Orbiting nodes -->
+            <circle class="orbit-node n1" cx="250" cy="120" r="6" fill="white"/>
+            <circle class="orbit-node n2" cx="380" cy="250" r="4" fill="rgba(255,255,255,0.7)"/>
+            <circle class="orbit-node n3" cx="250" cy="380" r="5" fill="rgba(255,255,255,0.6)"/>
+            <circle class="orbit-node n4" cx="120" cy="250" r="4" fill="rgba(255,255,255,0.5)"/>
+            <circle class="orbit-node n5" cx="345" cy="155" r="3" fill="rgba(255,255,255,0.4)"/>
+            <circle class="orbit-node n6" cx="345" cy="345" r="3" fill="rgba(255,255,255,0.4)"/>
+            <circle class="orbit-node n7" cx="155" cy="345" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle class="orbit-node n8" cx="155" cy="155" r="3" fill="rgba(255,255,255,0.3)"/>
+
+            <!-- Connection lines -->
+            <line x1="250" y1="126" x2="250" y2="205" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="374" y1="250" x2="286" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="250" y1="374" x2="250" y2="286" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="126" y1="250" x2="214" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+
+            <!-- Sound waves emanating -->
+            <path d="M 280 240 Q 300 250 280 260" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 295 230 Q 325 250 295 270" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 310 220 Q 350 250 310 280" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+
+          <!-- Scanning line animation -->
+          <div class="scan-line"></div>
+
+          <!-- Corner marks -->
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ WAVEFORM DIVIDER ══════════════════════════════════ -->
+  <div class="wave-divider">
+    <svg class="wave-svg" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline id="waveLine" points="" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    </svg>
+    <div class="wave-label">SIGNAL ACTIVE</div>
+  </div>
+
+  <!-- ══════════════════════════════════ HOW IT WORKS ══════════════════════════════════ -->
+  <section id="how" class="how section">
+    <p class="label center reveal-fade">002 — System</p>
+    <h2 class="section-title center reveal-up">How It <em>Works</em></h2>
+    <p class="section-sub center reveal-up delay-1">Three intelligent pathways. One seamless experience.</p>
+
+    <div class="flow-container">
+
+      <!-- Pipeline 1 -->
+      <div class="pipeline reveal-up delay-1">
+        <div class="pipe-header">
+          <div class="pipe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
+            </svg>
+          </div>
+          <span class="pipe-label">Voice Pipeline</span>
+        </div>
+        <div class="pipe-steps">
+          <div class="pipe-step active">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Microphone</strong>
+              <span>Raw audio capture</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Whisper STT</strong>
+              <span>Speech transcription</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Intent Engine</strong>
+              <span>LLM classification</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Action</strong>
+              <span>System execution</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline 2 -->
+      <div class="pipeline reveal-up delay-2">
+        <div class="pipe-header">
+          <div class="pipe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2a10 10 0 0 1 0 20M2 12h2M20 12h2"/>
+              <path d="M12 2v2M12 20v2"/>
+            </svg>
+          </div>
+          <span class="pipe-label">Eye Gesture Pipeline</span>
+        </div>
+        <div class="pipe-steps">
+          <div class="pipe-step active">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>EOG Sensor</strong>
+              <span>Bio-signal detection</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Signal Processing</strong>
+              <span>Noise filtering</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Gesture Map</strong>
+              <span> gaze decode</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Cursor Control</strong>
+              <span>Screen navigation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline 3 -->
+      <div class="pipeline reveal-up delay-3">
+        <div class="pipe-header">
+          <div class="pipe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              <path d="M8 12h8M12 8v8"/>
+            </svg>
+          </div>
+          <span class="pipe-label">Assistant Pipeline</span>
+        </div>
+        <div class="pipe-steps">
+          <div class="pipe-step active">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Trigger</strong>
+              <span>"Assistant" keyword</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>Groq LLM</strong>
+              <span>Conversation engine</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>LiveKit</strong>
+              <span>Real-time streaming</span>
+            </div>
+          </div>
+          <div class="pipe-connector"></div>
+          <div class="pipe-step">
+            <div class="step-dot"></div>
+            <div class="step-info">
+              <strong>TTS Response</strong>
+              <span>Neural voice output</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ FEATURES ══════════════════════════════════ -->
+  <section id="features" class="features section">
+    <p class="label center reveal-fade">003 — Capabilities</p>
+    <h2 class="section-title center reveal-up">Core <em>Features</em></h2>
+
+    <div class="feat-grid">
+
+      <div class="feat-card large reveal-up delay-1">
+        <div class="feat-num">01</div>
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M24 6a6 6 0 0 0-6 6v12a6 6 0 0 0 12 0V12a6 6 0 0 0-6-6z"/>
+            <path d="M10 22v2a14 14 0 0 0 28 0v-2M24 38v6M16 44h16"/>
+          </svg>
+        </div>
+        <h3>Voice Commands</h3>
+        <p>Speak naturally. ANIS understands intent — not just keywords — and executes complex system actions in milliseconds.</p>
+        <div class="feat-tag">LLM-Powered</div>
+      </div>
+
+      <div class="feat-card reveal-up delay-2">
+        <div class="feat-num">02</div>
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="24" r="10"/>
+            <path d="M24 4v4M24 40v4M4 24h4M40 24h4"/>
+            <path d="M10.1 10.1l2.83 2.83M35.07 35.07l2.83 2.83M10.1 37.9l2.83-2.83M35.07 12.93l2.83-2.83"/>
+          </svg>
+        </div>
+        <h3>AI Assistant Mode</h3>
+        <p>Full conversational AI with memory, context, and real-time streaming powered by Groq.</p>
+        <div class="feat-tag">Groq LLM</div>
+      </div>
+
+      <div class="feat-card reveal-up delay-3">
+        <div class="feat-num">03</div>
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <ellipse cx="24" cy="20" rx="10" ry="13"/>
+            <circle cx="24" cy="18" r="3"/>
+            <path d="M14 32c0 5 4.5 9 10 9s10-4 10-9"/>
+          </svg>
+        </div>
+        <h3>Eye Gesture Control</h3>
+        <p>EOG bio-signals translate blinks and gaze into precise cursor movements and clicks.</p>
+        <div class="feat-tag">Bio-Signal</div>
+      </div>
+
+      <div class="feat-card reveal-up delay-1">
+        <div class="feat-num">04</div>
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="6" y="10" width="36" height="24" rx="3"/>
+            <path d="M16 34v6M32 34v6M10 40h28"/>
+            <path d="M14 22h4M22 18v8M30 20v4M36 22h-3"/>
+          </svg>
+        </div>
+        <h3>Real-Time UI</h3>
+        <p>WebSocket-driven interface that reacts instantly to every command, gesture, and state change.</p>
+        <div class="feat-tag">WebSocket</div>
+      </div>
+
+      <div class="feat-card reveal-up delay-2">
+        <div class="feat-num">05</div>
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="24" r="3"/>
+            <circle cx="10" cy="16" r="3"/>
+            <circle cx="38" cy="16" r="3"/>
+            <circle cx="10" cy="32" r="3"/>
+            <circle cx="38" cy="32" r="3"/>
+            <line x1="13" y1="17" x2="21" y2="23"/>
+            <line x1="35" y1="17" x2="27" y2="23"/>
+            <line x1="13" y1="31" x2="21" y2="25"/>
+            <line x1="35" y1="31" x2="27" y2="25"/>
+          </svg>
+        </div>
+        <h3>Context Awareness</h3>
+        <p>Sliding conversation memory ensures ANIS always understands what came before, not just what's said now.</p>
+        <div class="feat-tag">Multi-Turn</div>
+      </div>
+
+      <div class="feat-card reveal-up delay-3">
+        <div class="feat-num">06</div>
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 36l10-16 8 10 6-8 12 14"/>
+            <circle cx="6" cy="36" r="2" fill="white"/>
+            <circle cx="16" cy="20" r="2" fill="white"/>
+            <circle cx="24" cy="30" r="2" fill="white"/>
+            <circle cx="30" cy="22" r="2" fill="white"/>
+            <circle cx="42" cy="36" r="2" fill="white"/>
+          </svg>
+        </div>
+        <h3>Neural TTS</h3>
+        <p>PYTTSX3 powered voice output with sentence-buffered streaming — ANIS speaks as it thinks.</p>
+        <div class="feat-tag">PYTTSX3</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ FULL-BLEED VISUAL ══════════════════════════════════ -->
+  <div class="full-bleed">
+    <canvas id="waveCanvas"></canvas>
+    <div class="bleed-text">
+      <span class="bleed-big">VOICE.</span>
+      <span class="bleed-big offset">MIND.</span>
+      <span class="bleed-big">MACHINE.</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ DEMO ══════════════════════════════════ -->
+  <section id="demo" class="demo-section section">
+    <p class="label center reveal-fade">004 — Demonstration</p>
+    <h2 class="section-title center reveal-up">See it in <em>Action</em></h2>
+
+    <div class="demo-grid">
+
+      <div class="demo-card large reveal-up delay-1">
+        <div class="demo-player">
+          <div class="player-screen">
+            <div class="terminal">
+              <div class="terminal-bar">
+                <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="terminal-title">ANIS — Voice Engine</span>
+              </div>
+              <div class="terminal-body" id="termBody">
+                <div class="term-line"><span class="prompt">›</span> <span class="cmd">System ready. Listening...</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="player-waveform" id="demoWave">
+            <canvas id="demoWaveCanvas"></canvas>
+          </div>
+        </div>
+        <div class="demo-info">
+          <h3>Voice Command Engine</h3>
+          <p>LLM-powered intent classification with &lt;50ms latency</p>
+          <button class="demo-play-btn" id="demoPlayBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Run Demo
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-card reveal-up delay-2">
+        <div class="demo-player small">
+          <div class="player-screen dark">
+            <div class="chat-sim">
+              <div class="chat-msg assistant">
+                <span>How can I help you today?</span>
+              </div>
+              <div class="chat-msg user">
+                <span>Open Chrome and search for weather</span>
+              </div>
+              <div class="chat-msg assistant">
+                <span>Opening Chrome and searching for weather now...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-info">
+          <h3>Assistant Mode</h3>
+          <p>Groq-backed conversational AI with sliding memory</p>
+        </div>
+      </div>
+
+      <div class="demo-card reveal-up delay-3">
+        <div class="demo-player small">
+          <div class="player-screen dark">
+            <!-- Eye tracking visualization -->
+            <svg class="eye-viz" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+              <rect width="200" height="120" fill="transparent"/>
+              <!-- Grid -->
+              <line x1="0" y1="60" x2="200" y2="60" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+              <line x1="100" y1="0" x2="100" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+              <!-- EOG signal -->
+              <polyline class="eog-line" points="0,60 20,60 30,30 40,90 50,60 70,60 80,45 90,75 100,60 120,60 130,40 140,80 150,60 180,60 190,55 200,65"
+                fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Gaze point -->
+              <circle class="gaze-dot" cx="100" cy="60" r="4" fill="white" opacity="0.9"/>
+              <circle cx="100" cy="60" r="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <text x="5" y="12" fill="rgba(255,255,255,0.5)" font-size="8" font-family="monospace">EOG SIGNAL</text>
+              <text x="140" y="12" fill="rgba(255,255,255,0.5)" font-size="8" font-family="monospace">TRACKING</text>
+            </svg>
+          </div>
+        </div>
+        <div class="demo-info">
+          <h3>Eye Gesture Control</h3>
+          <p>EOG bio-signal processing at 60fps</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ TECH ══════════════════════════════════ -->
+  <section id="tech" class="tech-section section">
+    <p class="label center reveal-fade">005 — Stack</p>
+    <h2 class="section-title center reveal-up">Tech <em>Stack</em></h2>
+
+    <div class="tech-grid">
+      <div class="tech-item reveal-fade delay-1">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm0 2c6.63 0 12 5.37 12 12S22.63 28 16 28 4 22.63 4 16 9.37 4 16 4zm-2 4v2h4V8h-4zm-1 4v8h2v-4h2v4h2v-8h-6z"/></svg>
+        </div>
+        <span>Python 3.12</span>
+      </div>
+      <div class="tech-item reveal-fade delay-2">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3 9 3 16s6 13 13 13 13-6 13-13S23 3 16 3zm0 2c6 0 11 5 11 11s-5 11-11 11S5 22 5 16 10 5 16 5zm-1 4v2h2V9h-2zm0 4v10h2V13h-2z"/></svg>
+        </div>
+        <span>Whisper STT</span>
+      </div>
+      <div class="tech-item reveal-fade delay-3">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 4C9.37 4 4 9.37 4 16s5.37 12 12 12 12-5.37 12-12S22.63 4 16 4zm0 2c5.52 0 10 4.48 10 10S21.52 26 16 26 6 21.52 6 16 10.48 6 16 6zm-2 4v4h-4v4h4v4h4v-4h4v-4h-4v-4h-4z"/></svg>
+        </div>
+        <span>Groq LLM</span>
+      </div>
+      <div class="tech-item reveal-fade delay-1">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M6 6h20v20H6V6zm2 2v16h16V8H8zm3 3h10v2H11v-2zm0 4h10v2H11v-2zm0 4h6v2h-6v-2z"/></svg>
+        </div>
+        <span>Electron</span>
+      </div>
+      <div class="tech-item reveal-fade delay-2">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M5 10v12h22V10H5zm2 2h18v8H7v-8zm2 2v4h2v-4H9zm4 0v4h2v-4h-2zm4 0v4h6v-4h-6z"/></svg>
+        </div>
+        <span>WebSocket</span>
+      </div>
+      <div class="tech-item reveal-fade delay-3">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 4C9.4 4 4 9.4 4 16s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4zm0 2c5.5 0 10 4.5 10 10S21.5 26 16 26 6 21.5 6 16 10.5 6 16 6zm-3 5v2h2v-2h-2zm4 0v2h2v-2h-2zm-5 4v2c0 2.2 1.8 4 4 4s4-1.8 4-4v-2h-2v2c0 1.1-.9 2-2 2s-2-.9-2-2v-2h-2z"/></svg>
+        </div>
+        <span>LiveKit</span>
+      </div>
+      <div class="tech-item reveal-fade delay-1">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M6 4v24h20V4H6zm2 2h16v20H8V6zm3 3v2h4V9h-4zm6 0v2h4V9h-4zm-6 4v2h4v-2h-4zm6 0v2h4v-2h-4zm-6 4v2h10v-2H11z"/></svg>
+        </div>
+        <span>pyttsx3</span>
+      </div>
+      <div class="tech-item reveal-fade delay-2">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 5l-3 7H6l6 4-2 7 6-4 6 4-2-7 6-4h-7z"/></svg>
+        </div>
+        <span>HTML/CSS/JS</span>
+      </div>
+      <div class="tech-item reveal-fade delay-3">
+        <div class="tech-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 4C9.4 4 4 9.4 4 16s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4zm-4 7h8v2h-3v8h-2v-8h-3v-2z"/></svg>
+        </div>
+        <span>asyncio</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ ARCHITECTURE ══════════════════════════════════ -->
+  <section id="arch" class="arch-section section">
+    <p class="label center reveal-fade">006 — Design</p>
+    <h2 class="section-title center reveal-up">Architecture</h2>
+
+    <div class="arch-diagram reveal-up delay-1">
+      <div class="arch-layer input-layer">
+        <div class="arch-node">
+          <div class="arch-icon">🎤</div>
+          <span>Microphone</span>
+        </div>
+        <div class="arch-node">
+          <div class="arch-icon">👁️</div>
+          <span>EOG Sensor</span>
+        </div>
+      </div>
+
+      <div class="arch-arrow-col">
+        <div class="arch-arrow down"></div>
+      </div>
+
+      <div class="arch-layer process-layer">
+        <div class="arch-node highlight">
+          <div class="arch-icon">🧠</div>
+          <span>Python Backend</span>
+          <small>Whisper + Intent Engine + Assistant</small>
+        </div>
+      </div>
+
+      <div class="arch-arrow-col">
+        <div class="arch-arrow down"></div>
+      </div>
+
+      <div class="arch-layer mid-layer">
+        <div class="arch-node">
+          <div class="arch-icon">⚡</div>
+          <span>WebSocket</span>
+        </div>
+        <div class="arch-node">
+          <div class="arch-icon">📡</div>
+          <span>LiveKit</span>
+        </div>
+      </div>
+
+      <div class="arch-arrow-col">
+        <div class="arch-arrow down"></div>
+      </div>
+
+      <div class="arch-layer output-layer">
+        <div class="arch-node">
+          <div class="arch-icon">🖥️</div>
+          <span>Electron UI</span>
+        </div>
+        <div class="arch-node">
+          <div class="arch-icon">🔊</div>
+          <span>TTS Voice</span>
+        </div>
+        <div class="arch-node">
+          <div class="arch-icon">⚙️</div>
+          <span>OS Actions</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ STORY ══════════════════════════════════ -->
+ <section id="story" class="story-section section">
+  <div class="story-bg-text" aria-hidden="true">ACCESS</div>
+
+  <div class="story-content">
+    <p class="label center reveal-fade">007 — Purpose</p>
+
+    <h2 class="story-title reveal-up">
+      Designed for<br><em>Human Limitation</em>
+    </h2>
+
+    <div class="story-body">
+
+      <p class="story-lead reveal-up delay-1">
+        For many people, interacting with a computer isn’t simple — it’s impossible.
+        Motor impairments can take away the ability to type, to click, to even hold a device.
+      </p>
+
+      <p class="story-para reveal-up delay-2">
+        But one ability often remains longer than the rest — <em>eye movement</em>.
+        Even in advanced stages of motor impairment, the eyes can still communicate intent.
+      </p>
+
+      <p class="story-para reveal-up delay-3">
+        ANIS was built around that reality.  
+        A system where voice, gaze, and minimal movement become enough —  
+        where interaction doesn’t depend on strength, but on presence.
+      </p>
+
+      <p class="story-para reveal-up delay-4">
+        This isn’t just about convenience.  
+        It’s about restoring control, independence, and a way to interact with the world —
+        when traditional interfaces fail.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+  <!-- ══════════════════════════════════ CONTRIBUTORS ══════════════════════════════════ -->
+<section class="contributors section">
+  <p class="label center reveal-fade">008 — Team</p>
+  <h2 class="section-title center reveal-up">Contributors</h2>
+
+  <!-- ⭐ GUIDE (Top Highlight Card) -->
+  <div class="guide-wrapper reveal-up">
+    <div class="contrib-card guide-card">
+      <div class="contrib-avatar">
+        <div class="avatar-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="18" r="8"/>
+            <path d="M8 40c0-8.84 7.16-16 16-16s16 7.16 16 16"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Jithin Mathews</h3>
+      <p>Project Guide<br>Mentor</p>
+      <a href="#" class="contrib-link">Profile ↗</a>
+    </div>
+  </div>
+
+  <!-- 👥 TEAM GRID -->
+  <div class="contrib-grid">
+    
+    <div class="contrib-card reveal-up delay-1">
+      <div class="contrib-avatar">
+        <div class="avatar-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="18" r="8"/>
+            <path d="M8 40c0-8.84 7.16-16 16-16s16 7.16 16 16"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Jones Rison</h3>
+      <p>Voice Pipeline</p>
+      <a href="#" class="contrib-link">GitHub ↗</a>
+    </div>
+
+    <div class="contrib-card reveal-up delay-2">
+      <div class="contrib-avatar">
+        <div class="avatar-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="18" r="8"/>
+            <path d="M8 40c0-8.84 7.16-16 16-16s16 7.16 16 16"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Joel Philip</h3>
+      <p>EOG Signal Processing Pipeline</p>
+      <a href="#" class="contrib-link">GitHub ↗</a>
+    </div>
+
+    <div class="contrib-card reveal-up delay-3">
+      <div class="contrib-avatar">
+        <div class="avatar-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="18" r="8"/>
+            <path d="M8 40c0-8.84 7.16-16 16-16s16 7.16 16 16"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Zishan</h3>
+      <p>Voice Assistant</p>
+      <a href="#" class="contrib-link">GitHub ↗</a>
+    </div>
+
+    <div class="contrib-card reveal-up delay-4">
+      <div class="contrib-avatar">
+        <div class="avatar-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="18" r="8"/>
+            <path d="M8 40c0-8.84 7.16 16 16 16s16 7.16 16 16"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Abin Prakash</h3>
+      <p>EOG Hardware & Integration</p>
+      <a href="#" class="contrib-link">GitHub ↗</a>
+    </div>
+
+  </div>
+</section>
+
+  <!-- ══════════════════════════════════ FUTURE ══════════════════════════════════ -->
+  <section class="future-section section">
+    <p class="label center reveal-fade">009 — Roadmap</p>
+    <h2 class="section-title center reveal-up">Future <em>Scope</em></h2>
+
+    <div class="future-list">
+
+  <div class="future-item reveal-up delay-1">
+    <span class="future-num">01</span>
+    <div class="future-text">
+      <h3>EEG-Based Neural Input</h3>
+      <p>Expanding beyond EOG by integrating EEG signals to capture deeper user intent, enabling interaction even in advanced motor impairment scenarios.</p>
+    </div>
+    <div class="future-status">Research</div>
+  </div>
+
+  <div class="future-item reveal-up delay-2">
+    <span class="future-num">02</span>
+    <div class="future-text">
+      <h3>Multi-Step Command Intelligence</h3>
+      <p>Enhancing voice understanding to handle complex, long-form commands by planning and executing multi-step tasks autonomously.</p>
+    </div>
+    <div class="future-status">In Progress</div>
+  </div>
+
+  <div class="future-item reveal-up delay-3">
+    <span class="future-num">03</span>
+    <div class="future-text">
+      <h3>Persistent Overlay Interface</h3>
+      <p>Transforming the UI into a lightweight, always-available overlay that assists users seamlessly across applications and workflows.</p>
+    </div>
+    <div class="future-status">Planned</div>
+  </div>
+
+  </div>
+  
+</div>
+
+  <!-- ══════════════════════════════════ FOOTER ══════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">ANIS</span>
+        <p>Acoustic Neural Input System</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 ANIS Project — Built with intent, voice, and vision.</p>
+      <div class="footer-orb"></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
