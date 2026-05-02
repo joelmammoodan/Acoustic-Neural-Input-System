@@ -7,7 +7,7 @@ import os
 import sys
 
 import WebSocket_broadcast as ws  # your WebSocket module
-
+ws.start()
 
 def load_settings():
     with open("settings.json", "r") as f:

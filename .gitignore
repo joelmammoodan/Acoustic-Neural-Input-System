@@ -32,3 +32,9 @@ Thumbs.db
 *.bin
 *.tar
 *.rar
+
+
+.env
+*.env
+__pycache__/
+*.pyc

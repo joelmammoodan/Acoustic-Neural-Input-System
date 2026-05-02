@@ -33,7 +33,6 @@ async def start_server():
 def run_server():
     asyncio.run(start_server())
 
-threading.Thread(target=run_server,daemon=True).start()
-
-
-
+def start():
+    """Call this explicitly to start the WebSocket broadcast server."""
+    threading.Thread(target=run_server, daemon=True).start()

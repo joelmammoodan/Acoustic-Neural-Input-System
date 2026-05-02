@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>A.N.I.S — Voice</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body class="voice-page">
+
+<div class="top_bar">
+    <div class="left_items">
+        <button id="back-btn">← Back</button>
+        <h3>Voice Commands</h3>
+    </div>
+    <div class="spacer"></div>
+    <div class="right_items">
+        <span id="ws-status" class="ws-badge ws-connecting">Connecting...</span>
+        <button id="theme-toggle">
+            <img id="mode" src="../Icons/moon.png" width="24" height="24">
+        </button>
+    </div>
+</div>
+
+<div id="voice-console">
+    <div id="voice-orb"></div>
+    <div id="voice-log"></div>
+    <div id="voice-empty">
+        <p>Waiting for voice commands...</p>
+        <p style="font-size:12px; opacity:0.5;">Speak into your microphone</p>
+    </div>
+</div>
+
+<script src="../src/voice.js"></script>
+</body>
+</html>
