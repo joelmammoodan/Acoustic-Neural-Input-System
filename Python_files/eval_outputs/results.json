@@ -1,0 +1,373 @@
+{
+  "pipeline": "gTTS \u2192 Whisper (large-v3-turbo) \u2192 Groq llama-3.1-8b-instant",
+  "samples": 20,
+  "metrics": {
+    "intent_accuracy_pct": 90.0,
+    "argument_accuracy_pct": 100.0,
+    "task_success_rate_pct": 90.0,
+    "stt_exact_match_pct": 20.0
+  },
+  "latency_ms": {
+    "stt": {
+      "mean": 429.6,
+      "median": 417.9,
+      "p95": 450.1,
+      "std": 63.4,
+      "min": 387.5,
+      "max": 700.4
+    },
+    "llm": {
+      "mean": 1019.3,
+      "median": 1118.8,
+      "p95": 1216.6,
+      "std": 256.5,
+      "min": 0.0,
+      "max": 1226.7
+    },
+    "total": {
+      "mean": 1448.9,
+      "median": 1526.3,
+      "p95": 1655.2,
+      "std": 270.0,
+      "min": 406.3,
+      "max": 1822.5
+    }
+  },
+  "per_intent": {
+    "open_app": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "scroll_down": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "press_key": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "screenshot": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "search": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "click": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "close_app": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "type_text": {
+      "n": 2,
+      "correct": 2,
+      "accuracy_pct": 100.0
+    },
+    "click_here": {
+      "n": 2,
+      "correct": 1,
+      "accuracy_pct": 50.0
+    },
+    "scroll_up": {
+      "n": 2,
+      "correct": 1,
+      "accuracy_pct": 50.0
+    }
+  },
+  "failures": [
+    {
+      "text": "click on this",
+      "gt": "click_here",
+      "pred": "click",
+      "conf": 0.95,
+      "transcript": "click on this."
+    },
+    {
+      "text": "scroll upwards",
+      "gt": "scroll_up",
+      "pred": "none",
+      "conf": 0.0,
+      "transcript": "crawl upwards."
+    }
+  ],
+  "low_confidence": [
+    {
+      "text": "scroll upwards",
+      "intent": "none",
+      "conf": 0.0
+    }
+  ],
+  "per_sample": [
+    {
+      "text": "open chrome",
+      "intent_gt": "open_app",
+      "argument_gt": "chrome",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0000.mp3",
+      "transcript": "open chrome",
+      "intent_pred": "open_app",
+      "argument_pred": "chrome",
+      "confidence": 0.95,
+      "stt_ms": 700.4,
+      "llm_ms": 1122.1,
+      "total_ms": 1822.5
+    },
+    {
+      "text": "scroll down",
+      "intent_gt": "scroll_down",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0001.mp3",
+      "transcript": "scroll down.",
+      "intent_pred": "scroll_down",
+      "argument_pred": null,
+      "confidence": 1.0,
+      "stt_ms": 419.6,
+      "llm_ms": 1226.7,
+      "total_ms": 1646.4
+    },
+    {
+      "text": "press enter",
+      "intent_gt": "press_key",
+      "argument_gt": "enter",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0002.mp3",
+      "transcript": "press enter.",
+      "intent_pred": "press_key",
+      "argument_pred": "enter",
+      "confidence": 0.95,
+      "stt_ms": 416.2,
+      "llm_ms": 1132.2,
+      "total_ms": 1548.4
+    },
+    {
+      "text": "take screenshot",
+      "intent_gt": "screenshot",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0003.mp3",
+      "transcript": "take screenshot.",
+      "intent_pred": "screenshot",
+      "argument_pred": null,
+      "confidence": 1.0,
+      "stt_ms": 404.5,
+      "llm_ms": 1131.0,
+      "total_ms": 1535.5
+    },
+    {
+      "text": "search youtube",
+      "intent_gt": "search",
+      "argument_gt": "youtube",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0004.mp3",
+      "transcript": "search youtube.",
+      "intent_pred": "search",
+      "argument_pred": "youtube",
+      "confidence": 0.95,
+      "stt_ms": 424.5,
+      "llm_ms": 1216.1,
+      "total_ms": 1640.6
+    },
+    {
+      "text": "click",
+      "intent_gt": "click",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0005.mp3",
+      "transcript": "click.",
+      "intent_pred": "click",
+      "argument_pred": null,
+      "confidence": 1.0,
+      "stt_ms": 387.5,
+      "llm_ms": 1028.2,
+      "total_ms": 1415.8
+    },
+    {
+      "text": "close chrome",
+      "intent_gt": "close_app",
+      "argument_gt": "chrome",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0006.mp3",
+      "transcript": "close chrome.",
+      "intent_pred": "close_app",
+      "argument_pred": "chrome",
+      "confidence": 0.95,
+      "stt_ms": 406.3,
+      "llm_ms": 0.0,
+      "total_ms": 406.3
+    },
+    {
+      "text": "type hello",
+      "intent_gt": "type_text",
+      "argument_gt": "hello",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0007.mp3",
+      "transcript": "type hello.",
+      "intent_pred": "type_text",
+      "argument_pred": "hello",
+      "confidence": 0.95,
+      "stt_ms": 403.3,
+      "llm_ms": 1148.1,
+      "total_ms": 1551.4
+    },
+    {
+      "text": "click here",
+      "intent_gt": "click_here",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0008.mp3",
+      "transcript": "click here.",
+      "intent_pred": "click_here",
+      "argument_pred": null,
+      "confidence": 0.95,
+      "stt_ms": 402.1,
+      "llm_ms": 1212.5,
+      "total_ms": 1614.6
+    },
+    {
+      "text": "scroll up",
+      "intent_gt": "scroll_up",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0009.mp3",
+      "transcript": "scroll up.",
+      "intent_pred": "scroll_up",
+      "argument_pred": null,
+      "confidence": 1.0,
+      "stt_ms": 408.2,
+      "llm_ms": 1122.3,
+      "total_ms": 1530.6
+    },
+    {
+      "text": "launch chrome browser",
+      "intent_gt": "open_app",
+      "argument_gt": "chrome",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0010.mp3",
+      "transcript": "launch chrome browser",
+      "intent_pred": "open_app",
+      "argument_pred": "chrome browser",
+      "confidence": 0.95,
+      "stt_ms": 433.3,
+      "llm_ms": 1029.4,
+      "total_ms": 1462.8
+    },
+    {
+      "text": "scroll downwards",
+      "intent_gt": "scroll_down",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0011.mp3",
+      "transcript": "crawl downwards.",
+      "intent_pred": "scroll_down",
+      "argument_pred": null,
+      "confidence": 0.98,
+      "stt_ms": 434.2,
+      "llm_ms": 963.7,
+      "total_ms": 1397.9
+    },
+    {
+      "text": "hit enter key",
+      "intent_gt": "press_key",
+      "argument_gt": "enter",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0012.mp3",
+      "transcript": "hit enter key.",
+      "intent_pred": "press_key",
+      "argument_pred": "enter",
+      "confidence": 0.95,
+      "stt_ms": 422.3,
+      "llm_ms": 965.7,
+      "total_ms": 1388.0
+    },
+    {
+      "text": "capture screen",
+      "intent_gt": "screenshot",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0013.mp3",
+      "transcript": "capture screen",
+      "intent_pred": "screenshot",
+      "argument_pred": null,
+      "confidence": 0.99,
+      "stt_ms": 424.3,
+      "llm_ms": 965.7,
+      "total_ms": 1390.0
+    },
+    {
+      "text": "search google",
+      "intent_gt": "search",
+      "argument_gt": "google",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0014.mp3",
+      "transcript": "search google.",
+      "intent_pred": "search",
+      "argument_pred": "google",
+      "confidence": 0.95,
+      "stt_ms": 405.6,
+      "llm_ms": 1116.5,
+      "total_ms": 1522.1
+    },
+    {
+      "text": "click now",
+      "intent_gt": "click",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0015.mp3",
+      "transcript": "click now.",
+      "intent_pred": "click",
+      "argument_pred": null,
+      "confidence": 0.95,
+      "stt_ms": 409.3,
+      "llm_ms": 900.9,
+      "total_ms": 1310.2
+    },
+    {
+      "text": "exit chrome",
+      "intent_gt": "close_app",
+      "argument_gt": "chrome",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0016.mp3",
+      "transcript": "exit chrome",
+      "intent_pred": "close_app",
+      "argument_pred": "chrome",
+      "confidence": 0.95,
+      "stt_ms": 402.7,
+      "llm_ms": 1027.4,
+      "total_ms": 1430.1
+    },
+    {
+      "text": "type hello world",
+      "intent_gt": "type_text",
+      "argument_gt": "hello world",
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0017.mp3",
+      "transcript": "type hello world.",
+      "intent_pred": "type_text",
+      "argument_pred": "hello world",
+      "confidence": 0.97,
+      "stt_ms": 427.0,
+      "llm_ms": 1121.1,
+      "total_ms": 1548.1
+    },
+    {
+      "text": "click on this",
+      "intent_gt": "click_here",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0018.mp3",
+      "transcript": "click on this.",
+      "intent_pred": "click",
+      "argument_pred": null,
+      "confidence": 0.95,
+      "stt_ms": 422.8,
+      "llm_ms": 1134.4,
+      "total_ms": 1557.2
+    },
+    {
+      "text": "scroll upwards",
+      "intent_gt": "scroll_up",
+      "argument_gt": null,
+      "audio_path": "C:\\Users\\User\\Documents\\Mini project\\Acoustic-Neural-Input-System\\Python_files\\audio_samples\\sample_0019.mp3",
+      "transcript": "crawl upwards.",
+      "intent_pred": "none",
+      "argument_pred": null,
+      "confidence": 0.0,
+      "stt_ms": 436.9,
+      "llm_ms": 822.9,
+      "total_ms": 1259.7
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+ANIS VOICE PIPELINE — END-TO-END EVALUATION
+=======================================================
+
+Pipeline : gTTS → Whisper (large-v3-turbo) → Groq llama-3.1-8b-instant
+Samples  : 20
+
+── ACCURACY ──────────────────────────────────
+Intent Accuracy     : 90.0%
+Argument Accuracy   : 100.0%
+Task Success Rate   : 90.0%
+STT Exact Match     : 20.0%
+
+── LATENCY (ms) ──────────────────────────────
+STT (Whisper)      mean=429.6  median=417.9  p95=450.1  min=387.5  max=700.4
+LLM (Groq)         mean=1019.3  median=1118.8  p95=1216.6  min=0.0  max=1226.7
+Total              mean=1448.9  median=1526.3  p95=1655.2  min=406.3  max=1822.5
+
+── PER-INTENT ACCURACY ───────────────────────
+  click                2/ 2  (100.0%)
+  click_here           1/ 2  (50.0%)
+  close_app            2/ 2  (100.0%)
+  open_app             2/ 2  (100.0%)
+  press_key            2/ 2  (100.0%)
+  screenshot           2/ 2  (100.0%)
+  scroll_down          2/ 2  (100.0%)
+  scroll_up            1/ 2  (50.0%)
+  search               2/ 2  (100.0%)
+  type_text            2/ 2  (100.0%)
+
+── FAILURES ──────────────────────────────────
+  [click_here → click]  text='click on this'  transcript='click on this.'  conf=0.95
+  [scroll_up → none]  text='scroll upwards'  transcript='crawl upwards.'  conf=0.0
+
+── LOW CONFIDENCE ────────────────────────────
+  none                conf=0.0  text='scroll upwards'

@@ -1,0 +1,100 @@
+text,intent,argument
+open chrome,open_app,chrome
+scroll down,scroll_down,None
+press enter,press_key,enter
+take screenshot,screenshot,None
+search youtube,search,youtube
+click,click,None
+close chrome,close_app,chrome
+type hello,type_text,hello
+click here,click_here,None
+scroll up,scroll_up,None
+launch chrome browser,open_app,chrome
+scroll downwards,scroll_down,None
+hit enter key,press_key,enter
+capture screen,screenshot,None
+search google,search,google
+click now,click,None
+exit chrome,close_app,chrome
+type hello world,type_text,hello world
+click on this,click_here,None
+scroll upwards,scroll_up,None
+start google chrome,open_app,chrome
+move down,scroll_down,None
+press escape,press_key,escape
+take a screenshot,screenshot,None
+search cats,search,cats
+perform click,click,None
+terminate chrome,close_app,chrome
+write hello,type_text,hello
+select this,click_here,None
+move up,scroll_up,None
+open notepad,open_app,notepad
+go down,scroll_down,None
+press tab,press_key,tab
+capture display,screenshot,None
+look up weather,search,weather
+left click,click,None
+close notepad,close_app,notepad
+enter hello world,type_text,hello world
+press here,click_here,None
+go up,scroll_up,None
+launch notepad,open_app,notepad
+scroll the page down,scroll_down,None
+press space,press_key,space
+save screen image,screenshot,None
+search news,search,news
+do a click,click,None
+exit notepad,close_app,notepad
+type my name is john,type_text,my name is john
+click at this point,click_here,None
+scroll the page up,scroll_up,None
+open calculator,open_app,calculator
+move the page down,scroll_down,None
+press backspace,press_key,backspace
+take screen shot,screenshot,None
+find youtube videos,search,youtube videos
+single click,click,None
+close calculator,close_app,calculator
+write testing one two,type_text,testing one two
+tap here,click_here,None
+move the page up,scroll_up,None
+start calculator,open_app,calculator
+scroll a bit down,scroll_down,None
+press control,press_key,ctrl
+capture current screen,screenshot,None
+search python tutorial,search,python tutorial
+click the mouse,click,None
+exit calculator,close_app,calculator
+enter text hello,type_text,hello
+choose this,click_here,None
+go upwards,scroll_up,None
+open file explorer,open_app,explorer
+go downwards,scroll_down,None
+press shift,press_key,shift
+grab screen,screenshot,None
+look up AI tools,search,AI tools
+tap once,click,None
+close vscode,close_app,vscode
+type something,type_text,something
+click this option,click_here,None
+scroll screen up,scroll_up,None
+launch file explorer,open_app,explorer
+scroll screen down,scroll_down,None
+press alt,press_key,alt
+screen capture,screenshot,None
+search machine learning,search,machine learning
+press click,click,None
+exit vscode,close_app,vscode
+write sample text,type_text,sample text
+select here,click_here,None
+scroll higher,scroll_up,None
+open vscode,open_app,vscode
+scroll lower,scroll_down,None
+press delete,press_key,delete
+take display screenshot,screenshot,None
+find latest news,search,latest news
+click action,click,None
+terminate file explorer,close_app,explorer
+type random words,type_text,random words
+click this button,click_here,None
