@@ -1,10 +1,8 @@
-🎙️🧠 Acoustic Neural Input System (ANIS)
+Acoustic Neural Input System (ANIS)
 
 A multimodal human–computer interaction system enabling hands-free computer control using voice commands and bio-signal inputs, designed for accessibility-focused interaction.
 
----
-
-📌 Project Overview
+Project Overview
 
 ANIS is an accessibility-driven system that allows users to interact with a computer without traditional input devices.
 
@@ -15,27 +13,24 @@ It combines:
 
 The system is built using open-source tools and low-cost hardware, making it suitable for real-world assistive applications and experimentation.
 
----
 
-🧩 Key Features
+Key Features
 
-### 🎤 Voice Command System
+### Voice Command System
 - Speech-to-text using Whisper  
 - LLM-based intent detection  
 - Execution of system-level commands  
 - Validation layer for safe operation  
 
----
 
-### 🤖 Assistant Mode
+### Assistant Mode
 - Activated using the keyword **"assistant"**  
 - Runs a conversational loop using Groq LLM  
 - Maintains short-term context  
 - Supports natural queries and exit commands  
 
----
 
-### 🧠 Bio-Signal Input (EOG / EEG)
+### Bio-Signal Input (EOG / EEG)
 
 - Signal acquisition using:
   - BioAmp EXG Pill  
@@ -55,7 +50,7 @@ This module is functional but experimental, and accuracy depends on calibration 
 
 ---
 
-### ⚡ Real-Time UI
+### Real-Time UI
 
 - WebSocket-based live communication  
 - Displays:
@@ -66,7 +61,7 @@ This module is functional but experimental, and accuracy depends on calibration 
 
 ---
 
-🧠 System Architecture
+System Architecture
 
 Voice Pipeline:  
 Mic → Whisper → LLM → Intent → Execution  
@@ -82,7 +77,7 @@ Backend → WebSocket → Live UI
 
 ---
 
-🚧 Limitations
+ Limitations
 
 - Bio-signal accuracy depends heavily on hardware quality and calibration  
 - EEG/EOG signals are noisy and require controlled conditions  
@@ -91,7 +86,7 @@ Backend → WebSocket → Live UI
 
 ---
 
-🔮 Future Scope
+Future Scope
 
 - Improved EEG-based intent classification  
 - Adaptive calibration for bio-signal inputs  
